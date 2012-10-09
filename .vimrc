@@ -4,55 +4,7 @@
 set nocompatible
 " load vundle
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 "}}}
-
-"{{{ bundles
-" vundle plugin manager
-Bundle 'gmarik/vundle'
-" solarized theme
-Bundle 'altercation/vim-colors-solarized'
-" syntax checking
-Bundle 'scrooloose/syntastic'
-" misc handy mappings
-Bundle 'tpope/vim-unimpaired'
-" commenting
-Bundle 'scrooloose/nerdcommenter'
-" project tree
-Bundle 'scrooloose/nerdtree'
-" git
-Bundle 'tpope/vim-fugitive'
-" vertically align
-Bundle 'godlygeek/tabular'
-" change "surrounds"
-Bundle 'tpope/vim-surround'
-" markdown
-Bundle 'tpope/vim-markdown'
-" buffer tabs
-" haskellmode
-Bundle 'kevinstreit/VIM-Haskell'
-
-Bundle 'cucumber.zip'
-Bundle 'chaquotay/ftl-vim-syntax'
-Bundle 'dmreiland/vim-puppet'
-Bundle 'mattn/gist-vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'skammer/vim-css-color'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'groenewege/vim-less'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'kien/ctrlp.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'ervandew/supertab'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "georgebashi/snipmate-snippets"
-Bundle "garbas/vim-snipmate"
-"}}}
-
 
 "{{{ ctrlp
 let g:ctrlp_working_path_mode = 2
