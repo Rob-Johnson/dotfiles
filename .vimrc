@@ -100,9 +100,6 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 syntax on
 set t_Co=256
 set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
-call togglebg#map("<F5>")
 "}}}
 
 "{{{ search
