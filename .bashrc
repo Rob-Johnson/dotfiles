@@ -30,6 +30,10 @@ alias dfh='df -h'
 alias gvim='gvim -geom 84x26'
 alias start='dbus-launch startx'
 
-#TimeStamps to BashHistory
-HISTTIMEFORMAT='%F %T '
-export HISTTIMEFORMAT 
+
+#add timestamps to bash history
+export HISTTIMEFORMAT="%F %T "
+# Specify history size, default 500
+export HISTSIZE=8000
+# History items to ignore
+export HISTIGNORE="histor*:h"
