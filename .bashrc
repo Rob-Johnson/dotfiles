@@ -1,18 +1,3 @@
-alias cabinodecheck='#!/bin/bash
-
-for HOST in cspcabweb03ya cspcabweb03xb; do
-   echo checking solr index version on $HOST
-   COMMAND="curl -s http://${HOST}:20101/replication?command=details | /opt/semantico/bin/xt | grep Version | sort -bu | wc -l"
-   RESULT=$(ssh robjadm@$HOST $COMMAND)
-   if [ $RESULT -gt 1 ]
-       then echo SOLR INDEX OUT OF SYNC ON $HOST
-       else echo OK
-       echo
-   fi
-done'
-
-
-
 # Aliases
 alias ll='ls -l'
 alias la='ls -a'
@@ -37,3 +22,9 @@ export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=8000
 # History items to ignore
 export HISTIGNORE="histor*:h"
+
+
+# Add bash aliases.
+if [ -f ~/.bash_aliases ]; then
+      source ~/.bash_aliases
+fi
