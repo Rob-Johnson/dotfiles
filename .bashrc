@@ -28,3 +28,6 @@ export HISTIGNORE="histor*:h"
 if [ -f ~/.bash_aliases ]; then
       source ~/.bash_aliases
 fi
+
+#vi mode
+set -o vi
