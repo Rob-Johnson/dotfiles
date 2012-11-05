@@ -8,7 +8,7 @@
   fsyncobjectfiles = true
   preloadindex = true
   pager = less
-	excludesfile = /Users/robj/.gitignore
+  excludesfile = /Users/robj/.gitignore
 [diff]
   mnemonicprefix = true
   renames = copy
