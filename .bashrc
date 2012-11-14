@@ -1,4 +1,3 @@
-
 #add timestamps to bash history
 export HISTTIMEFORMAT="%F %T "
 # Specify history size, default 500

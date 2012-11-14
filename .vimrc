@@ -30,6 +30,14 @@ set encoding=utf-8
 "}}}
 
 "{{{ ui
+
+
+" MacVim Specific Stuff
+if has('gui_running')
+    colorscheme solarized
+    set guifont=Menlo\ Regular:h14
+endif
+
 " show line numbers
 set number
 " show file position
