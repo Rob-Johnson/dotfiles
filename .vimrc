@@ -174,7 +174,7 @@ set virtualedit=block
 
 "{{{ misc plugin settings
 " my name for snippets
-let g:snips_author = 'George Bashi'
+let g:snips_author = 'Rob Johnson'
 "autocmd vimenter * NERDTree | winc l
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDChristmasTree=1
@@ -245,8 +245,15 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     "  " required! 
    Bundle 'gmarik/vundle'
 
+  " Nerd Tree
    Bundle 'scrooloose/nerdtree'
-
+  " Snipmate + dependencies
+  " Dependencies
+  Bundle "MarcWeber/vim-addon-mw-utils"
+  Bundle "tomtom/tlib_vim"
+  Bundle "honza/snipmate-snippets"
+  " snipmate 
+  Bundle 'msanders/snipmate.vim'
 " }}}
 
 " vim: set foldmethod=marker:
