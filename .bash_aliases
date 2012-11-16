@@ -14,5 +14,5 @@ alias grep='grep --color=auto'
 alias dfh='df -h'
 alias gvim='gvim -geom 84x26'
 alias start='dbus-launch startx'
-
+alias zgrep='zgrep --color=auto'
 
