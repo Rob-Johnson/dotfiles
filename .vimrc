@@ -170,6 +170,7 @@ vnoremap > >gv
 "{{{ misc vim settings
 set autowrite
 set virtualedit=block
+set modifiable
 "}}}
 
 "{{{ misc plugin settings
