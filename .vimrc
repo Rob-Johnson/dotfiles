@@ -179,6 +179,7 @@ let g:snips_author = 'Rob Johnson'
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDChristmasTree=1
 let NERDTreeMinimalUI=1
+let NERDTreeShowHidden=1
 map <Leader>n :NERDTreeToggle<CR>
 let g:gist_private = 1
 let g:Powerline_symbols = 'compatible'
