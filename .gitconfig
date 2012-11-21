@@ -8,7 +8,6 @@
   fsyncobjectfiles = true
   preloadindex = true
   pager = less
-  excludesfile = ~/.gitignore
 [diff]
   mnemonicprefix = true
   renames = copy

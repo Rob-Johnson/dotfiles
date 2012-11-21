@@ -20,7 +20,7 @@ let g:ctrlp_mruf_case_sensitive = 0
 "{{{ paths
 " put backups out of the way
 set backupdir=~/.vim/backup
-set directory=~/.vim/backup
+set directory=~/.vim/
 " persistent undo
 set undodir=~/.vim/undo
 set undolevels=1000
