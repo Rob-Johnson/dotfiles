@@ -121,6 +121,8 @@ set ignorecase
 set smartcase
 " always replace all matches on line
 set gdefault
+" Magic for regex
+set magic
 "}}}
 
 "{{{ filetypes
@@ -219,43 +221,39 @@ augroup FTMisc
         \ endif
   " allow browsing inside jars
   autocmd BufReadCmd *.jar call zip#Browse(expand("<amatch>"))
-augroup END
+  augroup END
+
+  au BufNewFile,BufRead *.ftl set ft=html.ftl
+  au FileType puppet set et sw=4 sts=4
 
 "}}}
 
-au BufNewFile,BufRead *.ftl set ft=html.ftl
-au FileType puppet set et sw=4 sts=4
-
-" autocomplete stuff {{{
+"{{{ automcomplete stuff
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabClosePreviewOnPopupClose = 1
 " }}}
 
-" eclim {{{
+"{{{ eclim stuff
 let g:EclimJavaImportExclude = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
 let g:EclimJavaImportPackageSeparationLevel = 0
 "}}}
 
-
-" vundle {{{
+"{{{ vundle
   set rtp+=~/.vim/bundle/vundle/
    call vundle#rc()
-
     " let Vundle manage Vundle
-    "  " required! 
-   Bundle 'gmarik/vundle'
-
-  " Nerd Tree
-   Bundle 'scrooloose/nerdtree'
-  " Snipmate + dependencies
-  " Dependencies
-  Bundle "MarcWeber/vim-addon-mw-utils"
-  Bundle "tomtom/tlib_vim"
-  Bundle "honza/snipmate-snippets"
-  " snipmate 
-  Bundle 'msanders/snipmate.vim'
+    Bundle 'gmarik/vundle'
+    " Nerd Tree
+    Bundle 'scrooloose/nerdtree'
+    " Snipmate + dependencies
+    " Dependencies
+    Bundle "MarcWeber/vim-addon-mw-utils"
+    Bundle "tomtom/tlib_vim"
+    Bundle "honza/snipmate-snippets"
+    " snipmate 
+    Bundle 'msanders/snipmate.vim'
 " }}}
 
 " vim: set foldmethod=marker:
