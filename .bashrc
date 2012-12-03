@@ -38,3 +38,4 @@ export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch)
 
 #rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
