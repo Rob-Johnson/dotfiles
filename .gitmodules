@@ -7,4 +7,7 @@
   ignore = untracked
 [submodule ".rbenv"]
 	path = .rbenv
-	url = git://github.com/sstephenson/rbenv.git
+	url = git@github.com:sstephenson/rbenv.git
+[submodule "gitignore"]
+  path = gitignore
+  url = git@github.com:github/gitignore.git
