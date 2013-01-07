@@ -254,6 +254,8 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     Bundle "honza/snipmate-snippets"
     " snipmate 
     Bundle 'msanders/snipmate.vim'
+    " CMDT
+    Bundle 'wincent/Command-T'
 " }}}
 
 " vim: set foldmethod=marker:

@@ -36,8 +36,11 @@ parse_svn_repository_root() {
 }
 export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch)\$(parse_svn_branch) \[\033[00m\]$\[\033[00m\] "
 
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home"
 
+#extra additions to path
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 #rbenv
 export PATH="/usr/local/bin:$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+#Java 7 jdk
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home"
