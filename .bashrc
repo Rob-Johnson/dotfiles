@@ -41,6 +41,7 @@ export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch)
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 #rbenv
 export PATH="/usr/local/bin:$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 #Java 7 jdk
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home"
+#Ruby Path
+export PATH="$PATH:/usr/local/Cellar/ruby/1.9.3-p327/bin/"

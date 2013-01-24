@@ -251,9 +251,6 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     " Dependencies
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
-    Bundle "honza/snipmate-snippets"
-    " snipmate 
-    Bundle 'msanders/snipmate.vim'
     " CMDT
     Bundle 'wincent/Command-T'
 " }}}
