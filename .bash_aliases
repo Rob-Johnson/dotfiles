@@ -15,6 +15,7 @@ alias dfh='df -h'
 alias gvim='gvim -geom 84x26'
 alias start='dbus-launch startx'
 alias zgrep='zgrep --color=auto'
+alias work_haste='HASTE_SERVER=http://pasti.co haste'
 #git stuff
 alias mvnb='mvn -DskipTests -DskipITs'
 alias mvnr='mvn jetty:run'
