@@ -34,6 +34,8 @@ set encoding=utf-8
 
 " MacVim Specific Stuff
 if has('gui_running')
+    autocmd VimEnter * NERDTree
+    autocmd VimEnter * wincmd p
     colorscheme solarized
     set guifont=Menlo\ Regular:h14
 endif
