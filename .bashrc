@@ -22,6 +22,10 @@ fi
 #vi mode
 set -o vi
 
+# init rbenv
+eval "$(rbenv init -)";
+
+#functions for PS1 
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(git::\1)/'
 }
@@ -40,7 +44,7 @@ export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch)
 #extra additions to path
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 #rbenv
-export PATH="/usr/local/bin:$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 #Java 7 jdk
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home"
 #Ruby Path

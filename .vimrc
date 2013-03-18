@@ -37,7 +37,7 @@ if has('gui_running')
     autocmd VimEnter * NERDTree
     autocmd VimEnter * wincmd p
     colorscheme solarized
-    set guifont=Menlo\ Regular:h14
+    set guifont=Menlo\ Regular:h10
 endif
 
 " show line numbers
@@ -266,6 +266,7 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     Bundle "tomtom/tlib_vim"
     " CMDT
     Bundle 'wincent/Command-T'
+    Bundle 'scrooloose/syntastic'
 " }}}
 
 " vim: set foldmethod=marker:
