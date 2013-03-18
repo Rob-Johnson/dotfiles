@@ -49,3 +49,9 @@ export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home"
 #Ruby Path
 export PATH="$PATH:/usr/local/Cellar/ruby/1.9.3-p327/bin/"
+
+#bash auto completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+
