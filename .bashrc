@@ -22,9 +22,6 @@ fi
 #vi mode
 set -o vi
 
-# init rbenv
-eval "$(rbenv init -)";
-
 #functions for PS1 
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(git::\1)/'
@@ -54,4 +51,7 @@ export PATH="$PATH:/usr/local/Cellar/ruby/1.9.3-p327/bin/"
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
+# init rbenv
+eval "$(rbenv init -)";
+
 
