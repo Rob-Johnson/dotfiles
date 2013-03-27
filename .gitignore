@@ -81,3 +81,4 @@
 .zsh-update
 .zsh_history
 .work_bash_aliases
+venv/
