@@ -44,8 +44,6 @@ export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 #Java 7 jdk
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home"
-#Ruby Path
-export PATH="$PATH:/usr/local/Cellar/ruby/1.9.3-p327/bin/"
 
 #bash auto completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then
