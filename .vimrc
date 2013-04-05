@@ -264,9 +264,9 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     " Dependencies
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
-    " CMDT
-    Bundle 'wincent/Command-T'
     Bundle 'scrooloose/syntastic'
+    " CtrlP
+    Bundle 'kien/ctrlp.vim'
 " }}}
 
 " vim: set foldmethod=marker:
