@@ -267,6 +267,9 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     Bundle 'scrooloose/syntastic'
     " CtrlP
     Bundle 'kien/ctrlp.vim'
+    Bundle 'eraserhd/vim-ios'
+    Bundle 'msanders/cocoa.vim'
+    Bundle 'Rip-Rip/clang_complete'
 " }}}
 
 " vim: set foldmethod=marker:
