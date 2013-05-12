@@ -10,8 +10,8 @@ export EDITOR=vim
 
 
 #Add bash aliases
-if [ -f ~/.bash_aliases ]; then
-source ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+source ~/.aliases
 fi
 
 # Add work bash aliases.
@@ -43,7 +43,7 @@ export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 #rbenv
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 #Java 7 jdk
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_15.jdk/Contents/Home"
 
 #bash auto completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then
