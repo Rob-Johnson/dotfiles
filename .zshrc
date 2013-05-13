@@ -4,7 +4,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 setopt PROMPT_SUBST
 
 ##load any config files
-for file in $(ls *.zsh)
+for file in $(ls ~/*.zsh)
 do
   source $file
 done
