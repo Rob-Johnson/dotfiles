@@ -196,6 +196,11 @@ let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDChristmasTree=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
+" Auto change the directory to the current file I'm working on
+autocmd BufEnter * lcd %:p:h
+" Close vim if the only left window open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 map <Leader>n :NERDTreeToggle<CR>
 let g:gist_private = 1
 let g:Powerline_symbols = 'compatible'
@@ -267,9 +272,12 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     Bundle 'scrooloose/syntastic'
     " CtrlP
     Bundle 'kien/ctrlp.vim'
-    Bundle 'eraserhd/vim-ios'
-    Bundle 'msanders/cocoa.vim'
-    Bundle 'Rip-Rip/clang_complete'
+    " Surround
+    Bundle 'tpope/vim-surround'
+    " Rails
+    Bundle 'tpope/vim-rails'
+    " Fugitive
+    Bundle 'tpope/vim-fugitive'
 " }}}
 
 " vim: set foldmethod=marker:
