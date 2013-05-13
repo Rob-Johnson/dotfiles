@@ -1,15 +1,15 @@
 autoload colors && colors
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-setopt PROMPT_SUBST
-
 ##load any config files
 for file in $(ls *.zsh)
 do
   source $file
 done
 
-function directory_name {
+autoload -U compinit && compinit
+function directory_name
+{
     echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
