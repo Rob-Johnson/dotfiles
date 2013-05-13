@@ -2,7 +2,7 @@ autoload colors && colors
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ##load any config files
-for file in $(ls *.zsh)
+for file in $(ls ~/*.zsh)
 do
   source $file
 done
