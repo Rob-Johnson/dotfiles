@@ -77,4 +77,4 @@ if is-at-least 5.0.0; then
   compdef _path_files cd
 fi
 
-
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home
