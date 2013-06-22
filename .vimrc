@@ -30,7 +30,8 @@ set encoding=utf-8
 "}}}
 
 "{{{ ui
-
+" Color Scheme in termial vim
+colorscheme jellybeans
 
 " MacVim Specific Stuff
 if has('gui_running')
@@ -278,6 +279,8 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     Bundle 'tpope/vim-rails'
     " Fugitive
     Bundle 'tpope/vim-fugitive'
+    " Jelly Beans Color Scheme
+    Bundle 'nanotech/jellybeans.vim'
 " }}}
 
 " vim: set foldmethod=marker:
