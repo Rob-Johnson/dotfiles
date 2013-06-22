@@ -8,13 +8,20 @@ filetype off
 
 "{{{ ctrlp
 let g:ctrlp_working_path_mode = 2
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \  },
+    \ 'fallback': 'find %s -type f'
+\ }
 let g:ctrlp_by_filename = 1
 let g:ctrlp_use_caching = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_mruf_relative = 1
-let g:ctrlp_dotfiles = 0
+let g:ctrlp_dotfiles = 1
 let g:ctrlp_mruf_case_sensitive = 0
+
 "}}}
 
 "{{{ paths
@@ -33,18 +40,12 @@ set encoding=utf-8
 " Color Scheme in termial vim
 colorscheme jellybeans
 
-" MacVim Specific Stuff
-if has('gui_running')
-    autocmd VimEnter * NERDTree
-    autocmd VimEnter * wincmd p
-    colorscheme solarized
-    set guifont=Menlo\ Regular:h10
-endif
-
 " show line numbers
 set number
 " show file position
 set ruler
+" show current line
+set cursorline
 " always show status bar
 set laststatus=2
 " make backspace do what you expect
@@ -88,9 +89,11 @@ set foldtext=MyFoldText()
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+" I hate tabs so they should be spaces
 set expandtab
 " highlight tabs & trailing spaces
-set list listchars=tab:\ \ ,trail:·
+set list
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
 " detect file type and load plugins & indent rules
 filetype plugin indent on
 " syntax-aware folds
@@ -102,6 +105,7 @@ set autoindent
 "{{{ tab completion
 " selection method
 set wildmenu
+" Show list instead of completing
 set wildmode=list:longest,full
 " files to ignore
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
@@ -166,10 +170,15 @@ nnoremap <silent> zk O<Esc>
 cmap w!! %!sudo tee > /dev/null %
 " use space to pagedown
 noremap <Space> <PageDown>
-" switch windows with ,
-nmap , <C-w><C-w>
-vnoremap < <gv
-vnoremap > >gv
+" Default leader is \ replace with ,
+let mapleader = ','
+" Yank from the cursor to the end of the line, to be consistent with C and D.
+nnoremap Y y$
+cnoremap %% <C-R>=expand(
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
 
 " Disable arrow keys
 map <up> <nop>
@@ -192,12 +201,49 @@ set modifiable
 "{{{ misc plugin settings
 " my name for snippets
 let g:snips_author = 'Rob Johnson'
-"autocmd vimenter * NERDTree | winc l
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-let NERDChristmasTree=1
-let NERDTreeMinimalUI=1
+
+" NerdTree
+map <leader>e :NERDTreeFind<CR>
+nmap <leader>nt :NERDTreeFind<CR>
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
-" Auto change the directory to the current file I'm working on
+let NERDTreeKeepTreeInNewTab=1
+let g:nerdtree_tabs_open_on_gui_startup=0
+let g:NERDTreeWinSize = 50
+
+"
+" Indent Guides
+" For some colorschemes, autocolor will not work (eg: 'desert', 'ir_black')
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121 ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=4
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+
+" Fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+" }
+
+" YouCompleteMe
+let g:ycm_seed_identifiers_with_syntax = 1
+" dont want any random buffers popping up
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
+" prevent interference with eclim locate buffer"
+let g:ycm_filetype_blacklist = {
+    \ 'locate_prompt' : 1,
+    \ 'notes' : 1,
+    \ 'markdown' : 1,
+    \ 'text' : 1,
+\}
+
 autocmd BufEnter * lcd %:p:h
 " Close vim if the only left window open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -205,11 +251,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 map <Leader>n :NERDTreeToggle<CR>
 let g:gist_private = 1
 let g:Powerline_symbols = 'compatible'
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#073642 ctermbg=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#073642 ctermbg=0
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 "}}}
 
@@ -228,7 +269,7 @@ augroup FTMisc
   autocmd FocusLost   * silent! wall
   autocmd FocusGained * silent! call fugitive#reload_status()
 
-  " chmod +x new files on save if they start with hashbang
+" chmod +x new files on save if they start with hashbang
   autocmd BufNewFile  * let b:chmod_exe=1
   autocmd BufWritePre * if exists("b:chmod_exe") |
         \ unlet b:chmod_exe |
@@ -244,6 +285,24 @@ augroup FTMisc
 
   au BufNewFile,BufRead *.ftl set ft=html.ftl
   au FileType puppet set et sw=4 sts=4
+  
+  " Strip whitespace
+  function! StripTrailingWhitespace()
+    " To disable the stripping of whitespace, add the following to your
+    " .vimrc.local file:
+    "   let g:spf13_keep_trailing_whitespace = 1
+    if !exists('g:spf13_keep_trailing_whitespace')
+      " Preparation: save last search, and cursor position.
+      let _s=@/
+      let l = line(".")
+      let c = col(".")
+      " do the business:
+      %s/\s\+$//e
+      " clean up: restore previous search history, and cursor position
+      let @/=_s
+      call cursor(l, c)
+    endif
+  endfunction
 
 "}}}
 
@@ -257,6 +316,12 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 "{{{ eclim stuff
 let g:EclimJavaImportExclude = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
 let g:EclimJavaImportPackageSeparationLevel = 0
+let g:EclimJavaSearchSingleResult = 'tabnew'
+let g:EclimValidateSortResults = 'severity'
+let g:EclimLogLevel = 2
+let g:EclimSignLevel = 3
+let g:EclimLocateFileFuzzy = 0
+let g:EclimCompletionMethod = 'omnifunc'
 "}}}
 
 "{{{ vundle
@@ -267,20 +332,59 @@ let g:EclimJavaImportPackageSeparationLevel = 0
     " Nerd Tree
     Bundle 'scrooloose/nerdtree'
     " Snipmate + dependencies
-    " Dependencies
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
+    " Syntastic
     Bundle 'scrooloose/syntastic'
     " CtrlP
     Bundle 'kien/ctrlp.vim'
     " Surround
     Bundle 'tpope/vim-surround'
-    " Rails
-    Bundle 'tpope/vim-rails'
     " Fugitive
     Bundle 'tpope/vim-fugitive'
     " Jelly Beans Color Scheme
     Bundle 'nanotech/jellybeans.vim'
+    " Autoclose
+    Bundle 'spf13/vim-autoclose'
+    " Vim Indent Guides
+    Bundle 'nathanaelkane/vim-indent-guides'
+    " Gutter
+    Bundle 'airblade/vim-gitgutter'
+    " Tabularize
+    Bundle 'godlygeek/tabular'
+    " Tagbar
+    Bundle 'majutsushi/tagbar'
+    " Preview
+    Bundle 'spf13/vim-preview'
+    " Rooter
+    Bundle 'airblade/vim-rooter'
+    " YouCompleteMe
+    Bundle 'Valloric/YouCompleteMe'
+
+    "Language Bundles
+    " Rails
+    Bundle 'tpope/vim-rails'
+    " Markdown
+    Bundle 'tpope/vim-markdown'
+    " Cucumber
+    Bundle 'tpope/vim-cucumber'
+    Bundle 'quentindecock/vim-cucumber-align-pipes'
+    " Puppet
+    Bundle 'Puppet-Syntax-Highlighting'
+    " HTML
+    Bundle 'amirh/HTML-AutoCloseTag'
+    Bundle 'hail2u/vim-css3-syntax'
+    Bundle 'tpope/vim-haml'
+    Bundle 'chaquotay/ftl-vim-syntax'
+    " Javascript
+    Bundle 'elzr/vim-json'
+    Bundle 'groenewege/vim-less'
+    Bundle 'pangloss/vim-javascript'
+    Bundle 'briancollins/vim-jst'
+    Bundle 'kchmck/vim-coffee-script'
+    " Java
+    Bundle 'eddking/eclim-vundle'
+    
 " }}}
 
 " vim: set foldmethod=marker:
