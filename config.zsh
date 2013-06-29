@@ -61,6 +61,10 @@ bindkey -M vicmd "^r" history-incremental-search-backward
 #enable advanced globbing
 setopt extended_glob
 
+#colors
+export TERM=xterm-256color
+
+
 ###
 #### .oh-my-zsh/plugins/vi-mode
 ####
