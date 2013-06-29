@@ -39,12 +39,14 @@ set encoding=utf-8
 "{{{ ui
 " Color Scheme in termial vim
 colorscheme jellybeans
-
+set background=dark
 " show line numbers
 set number
 " show file position
 set ruler
-" show current line
+" show column
+set cursorcolumn
+" show line
 set cursorline
 " always show status bar
 set laststatus=2
@@ -261,9 +263,6 @@ if has("autocmd")
         \| exe "normal g'\"" | endif
 endif
 
-" all folds open by default
-autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
-
 augroup FTMisc
   " save when losing focus, update fugitive status when gaining
   autocmd FocusLost   * silent! wall
@@ -384,7 +383,8 @@ let g:EclimCompletionMethod = 'omnifunc'
     Bundle 'kchmck/vim-coffee-script'
     " Java
     Bundle 'eddking/eclim-vundle'
-    
+    " Objective C    
+    Bundle 'msanders/cocoa.vim'
 " }}}
 
 " vim: set foldmethod=marker:
