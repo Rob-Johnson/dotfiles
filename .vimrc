@@ -198,6 +198,8 @@ imap <right> <nop>
 set autowrite
 set virtualedit=block
 set modifiable
+"Fix 256-color
+set t_ut=
 "}}}
 
 "{{{ misc plugin settings
