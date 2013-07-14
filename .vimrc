@@ -66,6 +66,9 @@ set viminfo=/50,'50,:50,h
 " don't update screen for macros
 set lazyredraw
 set viewoptions=folds,options,cursor,unix,slash
+" all folds open by default
+autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
+
 
 function! MyFoldText() " {{{
     let line = getline(v:foldstart)
