@@ -6,17 +6,6 @@ set nocompatible
 filetype off
 "}}}
 
-"{{{ ctrlp
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = {
-    \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \  },
-    \ 'fallback': 'find %s -type f'
-\ }
-let g:ctrlp_dotfiles = 1
-"}}}
 
 "{{{ paths
 " put backups out of the way
@@ -236,6 +225,7 @@ nnoremap <silent> <leader>gp :Git push<CR>
 let g:ycm_seed_identifiers_with_syntax = 1
 " dont want any random buffers popping up
 set completeopt-=preview
+" close the completion window once I've made a selection 
 let g:ycm_add_preview_to_completeopt = 0
 " prevent interference with eclim locate buffer"
 let g:ycm_filetype_blacklist = {
@@ -245,13 +235,25 @@ let g:ycm_filetype_blacklist = {
     \ 'text' : 1,
 \}
 
+
+" ctrlp
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \  },
+    \ 'fallback': 'find %s -type f'
+\ }
+let g:ctrlp_dotfiles = 1
+"
+
 autocmd BufEnter * lcd %:p:h
 " Close vim if the only left window open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <Leader>n :NERDTreeToggle<CR>
 let g:gist_private = 1
-let g:Powerline_symbols = 'compatible'
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 "}}}
 
