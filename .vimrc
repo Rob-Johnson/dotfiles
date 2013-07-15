@@ -21,7 +21,7 @@ set encoding=utf-8
 
 "{{{ ui
 " Color Scheme in termial vim
-colorscheme jellybeans
+colorscheme molokai
 set background=dark
 " show line numbers
 set number
