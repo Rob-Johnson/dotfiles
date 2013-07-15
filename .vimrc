@@ -7,7 +7,7 @@ filetype off
 "}}}
 
 "{{{ ctrlp
-let g:ctrlp_working_path_mode = 2
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = {
     \ 'types': {
         \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
@@ -15,13 +15,7 @@ let g:ctrlp_user_command = {
     \  },
     \ 'fallback': 'find %s -type f'
 \ }
-let g:ctrlp_by_filename = 1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_mruf_relative = 1
 let g:ctrlp_dotfiles = 1
-let g:ctrlp_mruf_case_sensitive = 0
-
 "}}}
 
 "{{{ paths
@@ -310,13 +304,6 @@ augroup FTMisc
 
 "}}}
 
-"{{{ automcomplete stuff
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
-let g:SuperTabClosePreviewOnPopupClose = 1
-" }}}
-
 "{{{ eclim stuff
 let g:EclimJavaImportExclude = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
 let g:EclimJavaImportPackageSeparationLevel = 0
@@ -326,6 +313,20 @@ let g:EclimLogLevel = 2
 let g:EclimSignLevel = 3
 let g:EclimLocateFileFuzzy = 0
 let g:EclimCompletionMethod = 'omnifunc'
+
+"shortcuts
+nmap §1 :JavaCorrect<CR>
+nmap §f :JavaFormat<CR>
+nmap §g :JavaSearchContext<CR>
+nmap §i :JavaImport<CR>
+nmap §o :JavaImportOrganize<CR>
+nmap §d :JavaDocPreview<CR>
+nmap §c :JavaRename
+nmap §t :JavaSearch
+nmap §r :LocateFile<CR>
+nmap §n :lnext<CR>
+nmap §p :lprev<CR>
+nmap §q :lclose<CR>
 "}}}
 
 "{{{ vundle
