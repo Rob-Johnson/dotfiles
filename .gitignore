@@ -61,6 +61,7 @@
 .slocdata/
 .smb/
 .ssh/
+!.ssh/config
 .subversion/
 .subversion/auth/
 .sqlite_history
