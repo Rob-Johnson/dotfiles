@@ -246,7 +246,9 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
 \ }
 let g:ctrlp_dotfiles = 1
-"
+
+" python
+let python_highlight_all = 1
 
 autocmd BufEnter * lcd %:p:h
 " Close vim if the only left window open is NERDTree
@@ -391,8 +393,10 @@ nmap §q :lclose<CR>
     Bundle 'kchmck/vim-coffee-script'
     " Java
     Bundle 'eddking/eclim-vundle'
-    " Objective C    
+    " Objective C
     Bundle 'msanders/cocoa.vim'
+    " Python
+    Bundle 'hdima/python-syntax'
 " }}}
 
 " vim: set foldmethod=marker:
