@@ -24,7 +24,7 @@ setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
 
 # don't expand aliases _before_ completion has finished
-# #   like: git comm-[tab]
+#   like: git comm-[tab]
 setopt complete_aliases
 
 # matches case insensitive for lowercase
@@ -81,4 +81,4 @@ if is-at-least 5.0.0; then
   compdef _path_files cd
 fi
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_21.jdk/Contents/Home
