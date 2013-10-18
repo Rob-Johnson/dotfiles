@@ -128,6 +128,8 @@ au BufNewFile,BufRead *.json set ft=javascript
 " add some ruby types
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
 au BufRead,BufNewFile *.less set ft=css
+" Haskell 
+au BufEnter *.hs compiler ghc
 " .mg/config is a gitconfig file
 au BufRead,BufNewFile *.mg/config set ft=gitconfig
 " use 2 spaces in xml
@@ -191,7 +193,7 @@ set t_ut=
 "{{{ misc plugin settings
 " my name for snippets
 let g:snips_author = 'Rob Johnson'
-
+let g:haddock_browser="/Applications/Google Chrome.app"
 " NerdTree
 map <leader>e :NERDTreeFind<CR>
 nmap <leader>nt :NERDTreeFind<CR>
@@ -397,6 +399,8 @@ nmap §q :lclose<CR>
     Bundle 'msanders/cocoa.vim'
     " Python
     Bundle 'hdima/python-syntax'
+    " Haskell
+    Bundle 'lukerandall/haskellmode-vim'
 " }}}
 
 " vim: set foldmethod=marker:
