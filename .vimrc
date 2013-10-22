@@ -140,6 +140,8 @@ au FileType java set expandtab sw=4 sts=4
 au FileType python set expandtab sw=4 sts=4
 " use tabs in makefiles
 au FileType make set noexpandtab
+" use spellcheck in tex
+au FileType plaintex set spell spelllang=en_gb
 " allow modelines
 set modeline
 " search for modelines in first and last 10 lines
@@ -237,6 +239,7 @@ let g:ycm_filetype_blacklist = {
     \ 'notes' : 1,
     \ 'markdown' : 1,
     \ 'text' : 1,
+    \ 'plaintex' : 1,
 \}
 
 
