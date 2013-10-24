@@ -18,14 +18,16 @@ root: ~/workspace/dissertation
 windows:
   - interim-report:
       layout: main-vertical
-      pre: cd./interim-report
+      pre:
+        - cd ./interim-report
       panes:
         - bundle exec guard
         - vim
   - editor:
       layout: main-vertical
-      pre: cd ./EigenFaceRecognizerAlt
-      pre: source bin/activate
+      pre:
+        - cd ./EigenFaceRecognizerAlt
+        - source bin/activate
       panes:
         - bundle exec guard
         - vim
