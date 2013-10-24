@@ -80,5 +80,3 @@ autoload -U is-at-least
 if is-at-least 5.0.0; then
   compdef _path_files cd
 fi
-
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_21.jdk/Contents/Home
