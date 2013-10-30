@@ -236,10 +236,11 @@ let g:ycm_add_preview_to_completeopt = 0
 " prevent interference with eclim locate buffer"
 let g:ycm_filetype_blacklist = {
     \ 'locate_prompt' : 1,
-    \ 'notes' : 1,
-    \ 'markdown' : 1,
-    \ 'text' : 1,
-    \ 'plaintex' : 1,
+    \ 'notes'         : 1,
+    \ 'markdown'      : 1,
+    \ 'text'          : 1,
+    \ 'plaintex'      : 1,
+    \ 'tex'           : 1,
 \}
 
 
