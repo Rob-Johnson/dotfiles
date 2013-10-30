@@ -70,7 +70,6 @@ function! MyFoldText() " {{{
 endfunction " }}}
 set foldtext=MyFoldText()
 
-"}}}
 
 "{{{ whitespace
 " default indent 2 spaces
@@ -175,10 +174,10 @@ map <leader>ev :vsp %%
 map <leader>et :tabe %%
 
 " Disable arrow keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+map  <up> <nop>
+map  <down> <nop>
+map  <left> <nop>
+map  <right> <nop>
 imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
@@ -196,20 +195,20 @@ set t_ut=
 
 "{{{ misc plugin settings
 " my name for snippets
-let g:snips_author = 'Rob Johnson'
-let g:haddock_browser="/Applications/Google Chrome.app"
+let g:snips_author    = 'Rob Johnson'
+let g:haddock_browser = "/Applications/Google Chrome.app"
 " NerdTree
 map <leader>e :NERDTreeFind<CR>
 nmap <leader>nt :NERDTreeFind<CR>
-let NERDTreeShowBookmarks=1
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=1
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeKeepTreeInNewTab=1
-let g:nerdtree_tabs_open_on_gui_startup=0
-let g:NERDTreeWinSize = 50
+let NERDTreeShowBookmarks               = 1
+let NERDTreeIgnore                      = ['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let NERDTreeChDirMode                   = 0
+let NERDTreeQuitOnOpen                  = 1
+let NERDTreeMouseMode                   = 2
+let NERDTreeShowHidden                  = 1
+let NERDTreeKeepTreeInNewTab            = 1
+let g:nerdtree_tabs_open_on_gui_startup = 0
+let g:NERDTreeWinSize                   = 50
 
 "
 " Indent Guides
@@ -317,14 +316,14 @@ augroup FTMisc
 "}}}
 
 "{{{ eclim stuff
-let g:EclimJavaImportExclude = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
+let g:EclimJavaImportExclude                = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
 let g:EclimJavaImportPackageSeparationLevel = 0
-let g:EclimJavaSearchSingleResult = 'tabnew'
-let g:EclimValidateSortResults = 'severity'
-let g:EclimLogLevel = 2
-let g:EclimSignLevel = 3
-let g:EclimLocateFileFuzzy = 0
-let g:EclimCompletionMethod = 'omnifunc'
+let g:EclimJavaSearchSingleResult           = 'tabnew'
+let g:EclimValidateSortResults              = 'severity'
+let g:EclimLogLevel                         = 2
+let g:EclimSignLevel                        = 3
+let g:EclimLocateFileFuzzy                  = 0
+let g:EclimCompletionMethod                 = 'omnifunc'
 
 "shortcuts
 nmap §1 :JavaCorrect<CR>
@@ -407,6 +406,8 @@ nmap §q :lclose<CR>
     Bundle 'hdima/python-syntax'
     " Haskell
     Bundle 'lukerandall/haskellmode-vim'
+    " Go
+    Bundle 'Blackrush/vim-gocode'
 " }}}
 
 " vim: set foldmethod=marker:
