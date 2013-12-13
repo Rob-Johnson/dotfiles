@@ -88,6 +88,7 @@ set encoding=utf-8
     Bundle 'lukerandall/haskellmode-vim'
     " Go
     Bundle 'jnwhiteh/vim-golang'
+    Bundle 'Blackrush/vim-gocode'
 " }}}
 
 "{{{ ui
@@ -160,15 +161,6 @@ set foldmethod=syntax
 set autoindent
 "}}}
 
-"{{{ tab completion
-" selection method
-set wildmenu
-" Show list instead of completing
-set wildmode=list:longest,full
-" files to ignore
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
-"}}}
-
 "{{{ syntax
 syntax on
 set t_Co=256
@@ -197,11 +189,8 @@ au BufNewFile,BufRead *.gradle setf groovy
 au BufNewFile,BufRead *.json set ft=javascript
 " add some ruby types
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-au BufRead,BufNewFile *.less set ft=css
 " Haskell 
 au BufEnter *.hs compiler ghc
-" .mg/config is a gitconfig file
-au BufRead,BufNewFile *.mg/config set ft=gitconfig
 " use 2 spaces in xml
 au FileType xml set expandtab sw=2 sts=2
 " use 4 spaces in java
@@ -219,6 +208,9 @@ set modelines=10
 " markdown
 au BufRead,BufNewFile *.md set filetype=markdown
 au FileType markdown set spell spelllang=en_gb
+"" GO
+"gofmt on save
+au FileType go au BufWritePre <buffer> Fmt
 "}}}
 
 "{{{ mappings
