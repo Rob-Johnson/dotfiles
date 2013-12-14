@@ -19,6 +19,78 @@ set undoreload=10000
 set encoding=utf-8
 "}}}
 
+"vundle before everything else
+"{{{ vundle
+  set rtp+=~/.vim/bundle/vundle/
+   call vundle#rc()
+    " let Vundle manage Vundle
+    Bundle 'gmarik/vundle'
+    " Nerd Tree
+    Bundle 'scrooloose/nerdtree'
+    " Snipmate + dependencies
+    Bundle "MarcWeber/vim-addon-mw-utils"
+    Bundle "tomtom/tlib_vim"
+    " Syntastic
+    Bundle 'scrooloose/syntastic'
+    " CtrlP
+    Bundle 'kien/ctrlp.vim'
+    " Surround
+    Bundle 'tpope/vim-surround'
+    " Fugitive
+    Bundle 'tpope/vim-fugitive'
+    " Jelly Beans Color Scheme
+    Bundle 'nanotech/jellybeans.vim'
+    " Autoclose
+    Bundle 'spf13/vim-autoclose'
+    " Vim Indent Guides
+    Bundle 'nathanaelkane/vim-indent-guides'
+    " Gutter
+    Bundle 'airblade/vim-gitgutter'
+    " Tabularize
+    Bundle 'godlygeek/tabular'
+    " Tagbar
+    Bundle 'majutsushi/tagbar'
+    " Preview
+    Bundle 'spf13/vim-preview'
+    " Rooter
+    Bundle 'airblade/vim-rooter'
+    " YouCompleteMe
+    Bundle 'Valloric/YouCompleteMe'
+
+    "Language Bundles
+    " Rails
+    Bundle 'tpope/vim-rails'
+    " Markdown
+    Bundle 'tpope/vim-markdown'
+    " Cucumber
+    Bundle 'tpope/vim-cucumber'
+    Bundle 'quentindecock/vim-cucumber-align-pipes'
+    " Puppet
+    Bundle 'Puppet-Syntax-Highlighting'
+    " HTML
+    Bundle 'amirh/HTML-AutoCloseTag'
+    Bundle 'hail2u/vim-css3-syntax'
+    Bundle 'tpope/vim-haml'
+    Bundle 'chaquotay/ftl-vim-syntax'
+    " Javascript
+    Bundle 'elzr/vim-json'
+    Bundle 'groenewege/vim-less'
+    Bundle 'pangloss/vim-javascript'
+    Bundle 'briancollins/vim-jst'
+    Bundle 'kchmck/vim-coffee-script'
+    " Java
+    Bundle 'eddking/eclim-vundle'
+    " Objective C
+    Bundle 'msanders/cocoa.vim'
+    " Python
+    Bundle 'hdima/python-syntax'
+    " Haskell
+    Bundle 'lukerandall/haskellmode-vim'
+    " Go
+    Bundle 'jnwhiteh/vim-golang'
+    Bundle 'Blackrush/vim-gocode'
+" }}}
+
 "{{{ ui
 " Color Scheme in termial vim
 colorscheme molokai
@@ -69,7 +141,7 @@ function! MyFoldText() " {{{
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
-
+"}}}
 
 "{{{ whitespace
 " default indent 2 spaces
@@ -81,21 +153,12 @@ set expandtab
 " highlight tabs & trailing spaces
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
-" detect file type and load plugins & indent rules
+" detect file type and load plugins & indent rule
 filetype plugin indent on
 " syntax-aware folds
 set foldmethod=syntax
 " autoindent by default
 set autoindent
-"}}}
-
-"{{{ tab completion
-" selection method
-set wildmenu
-" Show list instead of completing
-set wildmode=list:longest,full
-" files to ignore
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 "}}}
 
 "{{{ syntax
@@ -126,11 +189,8 @@ au BufNewFile,BufRead *.gradle setf groovy
 au BufNewFile,BufRead *.json set ft=javascript
 " add some ruby types
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-au BufRead,BufNewFile *.less set ft=css
 " Haskell 
 au BufEnter *.hs compiler ghc
-" .mg/config is a gitconfig file
-au BufRead,BufNewFile *.mg/config set ft=gitconfig
 " use 2 spaces in xml
 au FileType xml set expandtab sw=2 sts=2
 " use 4 spaces in java
@@ -145,6 +205,12 @@ au FileType plaintex set spell spelllang=en_gb
 set modeline
 " search for modelines in first and last 10 lines
 set modelines=10
+" markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+au FileType markdown set spell spelllang=en_gb
+"" GO
+"gofmt on save
+au FileType go au BufWritePre <buffer> Fmt
 "}}}
 
 "{{{ mappings
@@ -339,75 +405,5 @@ nmap §n :lnext<CR>
 nmap §p :lprev<CR>
 nmap §q :lclose<CR>
 "}}}
-
-"{{{ vundle
-  set rtp+=~/.vim/bundle/vundle/
-   call vundle#rc()
-    " let Vundle manage Vundle
-    Bundle 'gmarik/vundle'
-    " Nerd Tree
-    Bundle 'scrooloose/nerdtree'
-    " Snipmate + dependencies
-    Bundle "MarcWeber/vim-addon-mw-utils"
-    Bundle "tomtom/tlib_vim"
-    " Syntastic
-    Bundle 'scrooloose/syntastic'
-    " CtrlP
-    Bundle 'kien/ctrlp.vim'
-    " Surround
-    Bundle 'tpope/vim-surround'
-    " Fugitive
-    Bundle 'tpope/vim-fugitive'
-    " Jelly Beans Color Scheme
-    Bundle 'nanotech/jellybeans.vim'
-    " Autoclose
-    Bundle 'spf13/vim-autoclose'
-    " Vim Indent Guides
-    Bundle 'nathanaelkane/vim-indent-guides'
-    " Gutter
-    Bundle 'airblade/vim-gitgutter'
-    " Tabularize
-    Bundle 'godlygeek/tabular'
-    " Tagbar
-    Bundle 'majutsushi/tagbar'
-    " Preview
-    Bundle 'spf13/vim-preview'
-    " Rooter
-    Bundle 'airblade/vim-rooter'
-    " YouCompleteMe
-    Bundle 'Valloric/YouCompleteMe'
-
-    "Language Bundles
-    " Rails
-    Bundle 'tpope/vim-rails'
-    " Markdown
-    Bundle 'tpope/vim-markdown'
-    " Cucumber
-    Bundle 'tpope/vim-cucumber'
-    Bundle 'quentindecock/vim-cucumber-align-pipes'
-    " Puppet
-    Bundle 'Puppet-Syntax-Highlighting'
-    " HTML
-    Bundle 'amirh/HTML-AutoCloseTag'
-    Bundle 'hail2u/vim-css3-syntax'
-    Bundle 'tpope/vim-haml'
-    Bundle 'chaquotay/ftl-vim-syntax'
-    " Javascript
-    Bundle 'elzr/vim-json'
-    Bundle 'groenewege/vim-less'
-    Bundle 'pangloss/vim-javascript'
-    Bundle 'briancollins/vim-jst'
-    Bundle 'kchmck/vim-coffee-script'
-    " Java
-    Bundle 'eddking/eclim-vundle'
-    " Objective C
-    Bundle 'msanders/cocoa.vim'
-    " Python
-    Bundle 'hdima/python-syntax'
-    " Haskell
-    Bundle 'lukerandall/haskellmode-vim'
-    " Go
-    Bundle 'Blackrush/vim-gocode'
-" }}}
-
+"
 " vim: set foldmethod=marker:
