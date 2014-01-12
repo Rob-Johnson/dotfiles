@@ -17,6 +17,7 @@ alias start='dbus-launch startx'
 alias zgrep='zgrep --color=auto'
 alias work_haste='HASTE_SERVER=http://pasti.co haste'
 alias cl=clear
+alias ppath='echo -e ${PATH//:/\\n} | less -iFNQRX'
 #git stuff
 alias mvnb='mvn -DskipTests -DskipITs'
 alias mvnr='mvn jetty:run'
