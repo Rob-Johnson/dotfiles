@@ -76,6 +76,9 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 
+# allow unsupported drives options for time machine
+defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
+
 # allow finder to be quit
 defaults write com.apple.Finder QuitMenuItem 1
 
