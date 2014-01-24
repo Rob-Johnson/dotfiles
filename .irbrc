@@ -2,7 +2,7 @@ require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
 
-# 25 entries in the list
+# 1000 entries in the list
 IRB.conf[:SAVE_HISTORY] = 1000
 
 # Save in ~
