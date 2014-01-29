@@ -292,6 +292,10 @@ nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 " }
 
+" Speed Git Gutter Up
+let g:gitgutter_eager=0
+let g:gitgutter_realtime = 0
+
 " YouCompleteMe
 let g:ycm_seed_identifiers_with_syntax = 1
 " dont want any random buffers popping up
