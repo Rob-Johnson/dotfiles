@@ -14,6 +14,9 @@ setopt CORRECT
 setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
 
+#don't need cd
+setopt autocd
+
 #history
 setopt HIST_VERIFY
 setopt SHARE_HISTORY # share history between sessions ???
@@ -74,9 +77,3 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-
-#list files as well as dirs when cd tab completing
-autoload -U is-at-least
-if is-at-least 5.0.0; then
-  compdef _path_files cd
-fi
