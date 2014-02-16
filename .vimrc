@@ -56,6 +56,8 @@ set encoding=utf-8
     Bundle 'airblade/vim-rooter'
     " YouCompleteMe
     Bundle 'Valloric/YouCompleteMe'
+    " Comments
+    Bundle 'scrooloose/nerdcommenter'
 
     "Language Bundles
     " Rails
@@ -89,6 +91,8 @@ set encoding=utf-8
     " Go
     Bundle 'jnwhiteh/vim-golang'
     Bundle 'Blackrush/vim-gocode'
+    " Ansible
+    Bundle 'chase/vim-ansible-yaml'
 " }}}
 
 "{{{ ui
