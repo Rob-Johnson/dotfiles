@@ -1,6 +1,7 @@
 /*
 !.*
 !*.zsh
+!*bin/
 .Bome/
 .DS_Store
 .EasyPmd2/
@@ -76,6 +77,7 @@
 .vim/plugin/
 .vim/view/
 .vim*.tmp
+.vim*.swp
 .viminfo
 .xbmc/
 .yjp/
