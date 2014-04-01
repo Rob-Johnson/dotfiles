@@ -213,8 +213,10 @@ set modelines=10
 au BufRead,BufNewFile *.md set filetype=markdown
 au FileType markdown set spell spelllang=en_gb
 "" GO
-"gofmt on save
+" gofmt on save
 au FileType go au BufWritePre <buffer> Fmt
+" allow editing crontab
+au filetype crontab setlocal nobackup nowritebackup
 "}}}
 
 "{{{ mappings
