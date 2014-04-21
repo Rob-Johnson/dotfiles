@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+#
+require 'aws-sdk'
+require 'awesome_print'
+
+def connection
+    AWS.config(:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+                           :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'])
+end
+
+def list_distributions
+  client.list_distributions
+end
+
+def parse_signers
+  resp = list_distributions
+  if resp.successful?
+    resp.data[:items].each do |dist|
+      ap dist[:id]
+      print "default cache behaviour signers\n"
+      ap dist[:default_cache_behavior][:trusted_signers]
+      print "other cache behaviour signers\n"
+      dist[:cache_behaviors][:items].each { |behaviour| ap behaviour[:path_pattern]; ap behaviour[:trusted_signers] }
+    end
+  end
+  return 'no distributions'
+end
+
+def client
+    AWS::CloudFront::Client.new
+end
+
+connection
+parse_signers
