@@ -1,4 +1,4 @@
 #!/bin/bash
-growlnotify -s -a terminal -m "Backing up Workspace" &&
+/usr/local/bin/growlnotify -a terminal -m "Backing up Workspace" &&
 rsync -vauxhizP --exclude ".DS_Store" --exclude ".fseventsd" --exclude ".Spotlight-V100" --exclude ".TemporaryItems" --exclude ".Trashes" /Users/robj/workspace /Volumes/WD\ 250GB/robj/ &&
-growlnotify -s -a terminal -m "Finished Backing up Workspace"
+/usr/local/bin/growlnotify -a terminal -m "Finished Backing up Workspace"
