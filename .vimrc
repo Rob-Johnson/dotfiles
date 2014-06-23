@@ -21,7 +21,7 @@ set encoding=utf-8
 
 "vundle before everything else
 "{{{ vundle
-  set rtp+=~/.vim/bundle/vundle/
+  set rtp+=~/.vim/bundle/vundle/Vundle.vim
    call vundle#rc()
     " let Vundle manage Vundle
     Bundle 'gmarik/vundle'
