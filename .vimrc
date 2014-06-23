@@ -93,6 +93,11 @@ set encoding=utf-8
     Bundle 'Blackrush/vim-gocode'
     " Ansible
     Bundle 'chase/vim-ansible-yaml'
+    " Node
+    Bundle 'moll/vim-node'
+    Bundle 'marijnh/tern_for_vim'
+    " JS
+    Bundle 'jelera/vim-javascript-syntax'
 " }}}
 
 "{{{ ui
