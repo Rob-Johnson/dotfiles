@@ -98,6 +98,10 @@ set encoding=utf-8
     Bundle 'marijnh/tern_for_vim'
     " JS
     Bundle 'jelera/vim-javascript-syntax'
+    " Jinja
+    Bundle 'mitsuhiko/vim-jinja'
+    " Typescript
+    Bundle 'leafgarland/typescript-vim'
 " }}}
 
 "{{{ ui
@@ -206,6 +210,8 @@ au FileType xml set expandtab sw=2 sts=2
 au FileType java set expandtab sw=4 sts=4
 " use 4 spaces in python
 au FileType python set expandtab sw=4 sts=4
+" use 4 spaces in typescript
+au FileType typescript set expandtab sw=4 sts=4
 " use tabs in makefiles
 au FileType make set noexpandtab
 " use spellcheck in tex
