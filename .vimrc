@@ -199,7 +199,7 @@ set magic
 " gradle = groovy
 au BufNewFile,BufRead *.gradle setf groovy
 " json = js
-au BufNewFile,BufRead *.json set ft=javascript
+autocmd BufNewFile,BufRead *.template set filetype=json
 " add some ruby types
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
 " Haskell 
