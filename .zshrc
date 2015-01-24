@@ -28,4 +28,16 @@ function fsup {
   rsync -v -e ssh $1 fs.rob-johnson.me:/var/www/fs.rob-johnson.me/
 }
 
-PROMPT='$(ruby_version) in $(directory_name) $(git_branch) > '
+function client_token {
+  TOKEN=`uuidgen`
+  NODASHES=`echo $TOKEN | sed 's/-//g'`
+  echo $TOKEN
+  echo "INSERT INTO client_tokens values(UNHEX('$NODASHES'), 0);"
+}
+
+function ansible-env {
+  source ~/workspace/ansible/hacking/env-setup
+}
+
+
+PROMPT='$(ruby_version) in $(directory_name) $(git_branch) >> '

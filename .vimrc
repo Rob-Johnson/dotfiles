@@ -38,8 +38,6 @@ set encoding=utf-8
     Bundle 'tpope/vim-surround'
     " Fugitive
     Bundle 'tpope/vim-fugitive'
-    " Jelly Beans Color Scheme
-    Bundle 'nanotech/jellybeans.vim'
     " Autoclose
     Bundle 'spf13/vim-autoclose'
     " Vim Indent Guides
@@ -58,6 +56,8 @@ set encoding=utf-8
     Bundle 'Valloric/YouCompleteMe'
     " Comments
     Bundle 'scrooloose/nerdcommenter'
+    " Colors
+    Bundle 'flazz/vim-colorschemes'
 
     "Language Bundles
     " Rails
@@ -89,8 +89,7 @@ set encoding=utf-8
     " Haskell
     Bundle 'lukerandall/haskellmode-vim'
     " Go
-    Bundle 'jnwhiteh/vim-golang'
-    Bundle 'Blackrush/vim-gocode'
+    Bundle 'fatih/vim-go'
     " Ansible
     Bundle 'chase/vim-ansible-yaml'
     " Node
@@ -102,6 +101,8 @@ set encoding=utf-8
     Bundle 'mitsuhiko/vim-jinja'
     " Typescript
     Bundle 'leafgarland/typescript-vim'
+    " Lisps
+    Bundle 'kovisoft/slimv'
 " }}}
 
 "{{{ ui
@@ -177,7 +178,6 @@ set autoindent
 "{{{ syntax
 syntax on
 set t_Co=256
-set background=dark
 "}}}
 
 "{{{ search
@@ -223,9 +223,6 @@ set modelines=10
 " markdown
 au BufRead,BufNewFile *.md set filetype=markdown
 au FileType markdown set spell spelllang=en_gb
-"" GO
-" gofmt on save
-au FileType go au BufWritePre <buffer> Fmt
 " allow editing crontab
 au filetype crontab setlocal nobackup nowritebackup
 "}}}
@@ -237,6 +234,8 @@ inoremap kj <Esc>
 map ; :
 " move ; to ;;
 noremap ;; ;
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 " press F2 before a paste to turn off autoindent
 set pastetoggle=<F2>
 " create blank line without entering insert
@@ -292,15 +291,6 @@ let NERDTreeShowHidden                  = 1
 let NERDTreeKeepTreeInNewTab            = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:NERDTreeWinSize                   = 50
-
-"
-" Indent Guides
-" For some colorschemes, autocolor will not work (eg: 'desert', 'ir_black')
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121 ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=4
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_enable_on_vim_startup = 1
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>

@@ -1,0 +1,2 @@
+#!/bin/bash 
+aws ec2 describe-instances --profile $1 --filter "Name=tag:Name,Values=$2" | jq '.Reservations[].Instances[] | select(.PublicIpAddress) | { ip: .PublicIpAddress, name: .Tags[] | select(.Key == "Name") | .Value }'

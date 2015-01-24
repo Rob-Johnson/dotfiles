@@ -1,0 +1,6 @@
+#!/bin/sh
+
+TOKEN=`uuidgen`
+NODASHES=`echo $TOKEN | sed 's/-//g'`
+echo $TOKEN
+echo "INSERT INTO client_tokens values(UNHEX('$NODASHES'), 0);"

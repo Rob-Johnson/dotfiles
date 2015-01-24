@@ -1,0 +1,14 @@
+#!/bin/sh
+
+docker build -t $1 .
+
+[[ ${*:2} =~ qa ]] && \
+  echo "tagging and releasing in qa"
+  docker tag $1 registry.realtime.bnservers.com/$1 && \
+  docker push registry.realtime.bnservers.com/$1 && \
+
+[[ ${*:2} =~ prod ]] && \
+  echo "tagging and releasing in prod"
+  docker tag $1 registry.product.bnservers.com/$1 && \
+  docker push registry.product.bnservers.com/$1
+
