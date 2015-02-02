@@ -13,8 +13,6 @@ defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # nuke stupid resume thing
-rm -r $HOME/Library/Saved\ Application\ State
-chmod -R a-w $HOME/Library/Saved\ Application\ State
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 # tab over all ui elements
