@@ -1,5 +1,6 @@
 #!/bin/sh
 
+#trackpad stuff
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -int 0
@@ -8,12 +9,8 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDoubleTapGesture -int 0
 defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 
-
 # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
 defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
-# nuke stupid resume thing
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 # tab over all ui elements
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
