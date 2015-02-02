@@ -8,6 +8,10 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDoubleTapGesture -int 0
 defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 
+
+# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
+defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
 # nuke stupid resume thing
 rm -r $HOME/Library/Saved\ Application\ State
 chmod -R a-w $HOME/Library/Saved\ Application\ State
@@ -25,6 +29,15 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # dock on left
 defaults write com.apple.dock orientation -string left
+
+# Set Dock to auto-hide and remove the auto-hiding delay
+defaults write com.apple.dock autohide - true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# dont send search queries to apple
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
 # show battery time in menu bar
 defaults write com.apple.menuextra.battery ShowTime -string "YES"
@@ -84,9 +97,6 @@ defaults write com.apple.finder AppleShowAllFiles true
 
 # allow finder to be quit
 defaults write com.apple.Finder QuitMenuItem 1
-
-# Reset Launchpad
-rm ~/Library/Application\ Support/Dock/*.db
 
 # Kill affected applications
 for app in Safari Finder Dock; do killall "$app"; done
