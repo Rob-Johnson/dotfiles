@@ -34,6 +34,8 @@ setopt complete_aliases
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
+# Don't error when there's nothing to glob, leave it unchanged
+setopt no_nomatch
 
 ## case-insensitive (all),partial-word and then substring completion
 ## credit github.com/roobert/dotfiles/.zshrc
