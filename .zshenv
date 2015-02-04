@@ -2,7 +2,7 @@ export EDITOR=vim
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export GOPATH="$HOME/workspace/go-workspace"
 export PATH=$HOME/.rbenv/bin:/usr/local/bin:$GOPATH/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$PATH
-export LESS="-n"
+export LESS="-nXR"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export PYTHONSTARTUP=~/.pythonrc
 export DOCKER_HOST=tcp://192.168.59.103:2376
