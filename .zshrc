@@ -39,6 +39,10 @@ function ansible-env {
   source ~/workspace/ansible/hacking/env-setup
 }
 
+function discovery {
+  curl -w "\n" https://discovery.etcd.io/new
+}
+
 # Lots of command examples (especially heroku) lead command docs with '$' which
 # make it kind of annoying to copy/paste, especially when there's multiple
 # commands to copy.
