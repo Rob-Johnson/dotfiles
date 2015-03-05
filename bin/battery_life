@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+battery_percentage() {
+  if [[ "$OSTYPE" =~ ^darwin ]]; then 
+   echo $(pmset -g ps | tail -1 | awk '{print $2}' | sed 's/;//')
+   exit 0
+  else
+    echo 'only osx supported for now'
+    exit 1
+  fi
+}
+
+battery_percentage
