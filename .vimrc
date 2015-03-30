@@ -9,8 +9,8 @@ filetype off
 
 "{{{ paths
 " put backups out of the way
-set backupdir=~/.vim/backup
-set directory=~/.vim/
+set directory=~/.vim/swp
+set backupdir=~/.vim/backup/
 " persistent undo
 set undodir=~/.vim/undo
 set undolevels=1000
@@ -249,11 +249,17 @@ noremap <Space> <PageDown>
 let mapleader = ','
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
-cnoremap %% <C-R>=expand(
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
+
+" Wrapped lines goes down/up to next row, rather than next line in file.
+nnoremap j gj
+nnoremap k gk
+
+" " Same for 0, home, end, etc
+noremap $ g$
+noremap <End> g<End>
+noremap 0 g0
+noremap <Home> g<Home>
+noremap ^ g^
 
 " Disable arrow keys
 map  <up> <nop>
@@ -402,7 +408,7 @@ let g:EclimSignLevel                        = 3
 let g:EclimLocateFileFuzzy                  = 0
 let g:EclimCompletionMethod                 = 'omnifunc'
 
-"shortcuts
+"Java shortcuts
 nmap §1 :JavaCorrect<CR>
 nmap §f :JavaFormat<CR>
 nmap §g :JavaSearchContext<CR>
@@ -416,5 +422,11 @@ nmap §n :lnext<CR>
 nmap §p :lprev<CR>
 nmap §q :lclose<CR>
 "}}}
+"
+"{{{ go stuff 
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+"}}}"
 "
 " vim: set foldmethod=marker:
