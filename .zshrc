@@ -57,5 +57,10 @@ function \$() {
   "$@"
 }
 
+# make a best-guess at killing a container
+function kill-container() { 
+  docker kill $(docker ps | grep $1 | awk '{print $1}') 
+}
+
 
 PROMPT='$(ruby_version) in $(directory_name) $(git_branch) >> '
