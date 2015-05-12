@@ -63,4 +63,4 @@ function kill-container() {
 }
 
 
-PROMPT='$(ruby_version) in $(directory_name) $(git_branch) >> '
+PROMPT='$(directory_name) $(git_branch) >> '
