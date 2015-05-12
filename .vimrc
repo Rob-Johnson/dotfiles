@@ -21,88 +21,91 @@ set encoding=utf-8
 
 "vundle before everything else
 "{{{ vundle
-  set rtp+=~/.vim/bundle/vundle/Vundle.vim
-   call vundle#rc()
+  set rtp+=~/.vim/bundle/Vundle.vim
+   call vundle#begin()
     " let Vundle manage Vundle
-    Bundle 'gmarik/vundle'
+    Plugin 'gmarik/Vundle.vim'
     " Nerd Tree
-    Bundle 'scrooloose/nerdtree'
+    Plugin 'scrooloose/nerdtree'
     " Snipmate + dependencies
-    Bundle "MarcWeber/vim-addon-mw-utils"
-    Bundle "tomtom/tlib_vim"
+    Plugin 'MarcWeber/vim-addon-mw-utils'
+    Plugin 'tomtom/tlib_vim'
     " Syntastic
-    Bundle 'scrooloose/syntastic'
+    Plugin 'scrooloose/syntastic'
     " CtrlP
-    Bundle 'kien/ctrlp.vim'
+    Plugin 'kien/ctrlp.vim'
     " Surround
-    Bundle 'tpope/vim-surround'
+    Plugin 'tpope/vim-surround'
     " Fugitive
-    Bundle 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-fugitive'
     " Autoclose
-    Bundle 'spf13/vim-autoclose'
+    Plugin 'spf13/vim-autoclose'
     " Vim Indent Guides
-    Bundle 'nathanaelkane/vim-indent-guides'
+    Plugin 'nathanaelkane/vim-indent-guides'
     " Gutter
-    Bundle 'airblade/vim-gitgutter'
+    Plugin 'airblade/vim-gitgutter'
     " Tabularize
-    Bundle 'godlygeek/tabular'
+    Plugin 'godlygeek/tabular'
     " Tagbar
-    Bundle 'majutsushi/tagbar'
+    Plugin 'majutsushi/tagbar'
     " Preview
-    Bundle 'spf13/vim-preview'
+    Plugin 'spf13/vim-preview'
     " Rooter
-    Bundle 'airblade/vim-rooter'
+    Plugin 'airblade/vim-rooter'
     " YouCompleteMe
-    Bundle 'Valloric/YouCompleteMe'
+    Plugin 'Valloric/YouCompleteMe'
     " Comments
-    Bundle 'scrooloose/nerdcommenter'
+    Plugin 'scrooloose/nerdcommenter'
     " Colors
-    Bundle 'flazz/vim-colorschemes'
+    Plugin 'flazz/vim-colorschemes'
 
-    "Language Bundles
+    "Language Plugins
     " Rails
-    Bundle 'tpope/vim-rails'
+    Plugin 'tpope/vim-rails'
     " Markdown
-    Bundle 'tpope/vim-markdown'
+    Plugin 'tpope/vim-markdown'
     " Cucumber
-    Bundle 'tpope/vim-cucumber'
-    Bundle 'quentindecock/vim-cucumber-align-pipes'
+    Plugin 'tpope/vim-cucumber'
+    Plugin 'quentindecock/vim-cucumber-align-pipes'
     " Puppet
-    Bundle 'Puppet-Syntax-Highlighting'
+    Plugin 'Puppet-Syntax-Highlighting'
     " HTML
-    Bundle 'amirh/HTML-AutoCloseTag'
-    Bundle 'hail2u/vim-css3-syntax'
-    Bundle 'tpope/vim-haml'
-    Bundle 'chaquotay/ftl-vim-syntax'
+    Plugin 'amirh/HTML-AutoCloseTag'
+    Plugin 'hail2u/vim-css3-syntax'
+    Plugin 'tpope/vim-haml'
+    Plugin 'chaquotay/ftl-vim-syntax'
     " Javascript
-    Bundle 'elzr/vim-json'
-    Bundle 'groenewege/vim-less'
-    Bundle 'pangloss/vim-javascript'
-    Bundle 'briancollins/vim-jst'
-    Bundle 'kchmck/vim-coffee-script'
+    Plugin 'elzr/vim-json'
+    Plugin 'groenewege/vim-less'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'briancollins/vim-jst'
+    Plugin 'kchmck/vim-coffee-script'
     " Java
-    Bundle 'eddking/eclim-vundle'
+    Plugin 'eddking/eclim-vundle'
     " Objective C
-    Bundle 'msanders/cocoa.vim'
+    Plugin 'msanders/cocoa.vim'
     " Python
-    Bundle 'hdima/python-syntax'
+    Plugin 'hdima/python-syntax'
     " Haskell
-    Bundle 'lukerandall/haskellmode-vim'
+    Plugin 'lukerandall/haskellmode-vim'
     " Go
-    Bundle 'fatih/vim-go'
+    Plugin 'fatih/vim-go'
     " Ansible
-    Bundle 'chase/vim-ansible-yaml'
+    Plugin 'chase/vim-ansible-yaml'
     " Node
-    Bundle 'moll/vim-node'
-    Bundle 'marijnh/tern_for_vim'
+    Plugin 'moll/vim-node'
+    Plugin 'marijnh/tern_for_vim'
     " JS
-    Bundle 'jelera/vim-javascript-syntax'
+    Plugin 'jelera/vim-javascript-syntax'
     " Jinja
-    Bundle 'mitsuhiko/vim-jinja'
+    Plugin 'mitsuhiko/vim-jinja'
     " Typescript
-    Bundle 'leafgarland/typescript-vim'
+    Plugin 'leafgarland/typescript-vim'
     " Lisps
-    Bundle 'kovisoft/slimv'
+    Plugin 'kovisoft/slimv'
+    " All of your Plugins must be added before the following line
+    call vundle#end()
+    filetype plugin indent on
 " }}}
 
 "{{{ ui
