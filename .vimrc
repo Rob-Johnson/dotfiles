@@ -56,49 +56,18 @@ set encoding=utf-8
     Plugin 'flazz/vim-colorschemes'
 
     "Language Plugins
-    " Rails
-    Plugin 'tpope/vim-rails'
     " Markdown
     Plugin 'tpope/vim-markdown'
-    " Cucumber
-    Plugin 'tpope/vim-cucumber'
-    Plugin 'quentindecock/vim-cucumber-align-pipes'
     " Puppet
     Plugin 'Puppet-Syntax-Highlighting'
-    " HTML
-    Plugin 'amirh/HTML-AutoCloseTag'
-    Plugin 'hail2u/vim-css3-syntax'
-    Plugin 'tpope/vim-haml'
-    Plugin 'chaquotay/ftl-vim-syntax'
-    " Javascript
-    Plugin 'elzr/vim-json'
-    Plugin 'groenewege/vim-less'
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'briancollins/vim-jst'
-    Plugin 'kchmck/vim-coffee-script'
-    " Java
-    Plugin 'eddking/eclim-vundle'
-    " Objective C
-    Plugin 'msanders/cocoa.vim'
     " Python
     Plugin 'hdima/python-syntax'
     " Haskell
     Plugin 'lukerandall/haskellmode-vim'
     " Go
     Plugin 'fatih/vim-go'
-    " Ansible
-    Plugin 'chase/vim-ansible-yaml'
-    " Node
-    Plugin 'moll/vim-node'
-    Plugin 'marijnh/tern_for_vim'
-    " JS
-    Plugin 'jelera/vim-javascript-syntax'
     " Jinja
     Plugin 'mitsuhiko/vim-jinja'
-    " Typescript
-    Plugin 'leafgarland/typescript-vim'
-    " Lisps
-    Plugin 'kovisoft/slimv'
     " All of your Plugins must be added before the following line
     call vundle#end()
     filetype plugin indent on
@@ -175,8 +144,6 @@ set magic
 "}}}
 
 "{{{ filetypes
-" gradle = groovy
-au BufNewFile,BufRead *.gradle setf groovy
 " json = js
 autocmd BufNewFile,BufRead *.template set filetype=json
 " add some ruby types
@@ -185,12 +152,8 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set f
 au BufEnter *.hs compiler ghc
 " use 2 spaces in xml
 au FileType xml set expandtab sw=2 sts=2
-" use 4 spaces in java
-au FileType java set expandtab sw=4 sts=4
 " use 4 spaces in python
 au FileType python set expandtab sw=4 sts=4
-" use 4 spaces in typescript
-au FileType typescript set expandtab sw=4 sts=4
 " use tabs in makefiles
 au FileType make set noexpandtab
 " use spellcheck in tex
@@ -207,12 +170,8 @@ au filetype crontab setlocal nobackup nowritebackup
 "}}}
 
 "{{{ mappings
-" use kj as a quicker <Esc>
-inoremap kj <Esc>
 " use ; as a quicker :
 map ; :
-" open netrw
-map <Leader>n :E<CR>
 " move ; to ;;
 noremap ;; ;
 " <Ctrl-l> redraws the screen and removes any search highlighting.
@@ -230,6 +189,8 @@ noremap <Space> <PageDown>
 let mapleader = ','
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
+" open file explorer with <leader>n
+map <Leader>n :Ex<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
@@ -260,6 +221,8 @@ set virtualedit=block
 set modifiable
 "Fix 256-color
 set t_ut=
+" change the current working directory to that of the file
+autocmd BufEnter * lcd %:p:h
 "}}}
 
 "{{{ misc plugin settings
@@ -309,7 +272,6 @@ let g:ctrlp_dotfiles = 1
 " python
 let python_highlight_all = 1
 
-autocmd BufEnter * lcd %:p:h
 
 let g:gist_private = 1
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
@@ -327,7 +289,7 @@ augroup FTMisc
   autocmd FocusLost   * silent! wall
   autocmd FocusGained * silent! call fugitive#reload_status()
 
-" chmod +x new files on save if they start with hashbang
+  " chmod +x new files on save if they start with hashbang
   autocmd BufNewFile  * let b:chmod_exe=1
   autocmd BufWritePre * if exists("b:chmod_exe") |
         \ unlet b:chmod_exe |
@@ -341,27 +303,7 @@ augroup FTMisc
   autocmd BufReadCmd *.jar call zip#Browse(expand("<amatch>"))
   augroup END
 
-  au BufNewFile,BufRead *.ftl set ft=html.ftl
-  au FileType puppet set et sw=4 sts=4
   
-  " Strip whitespace
-  function! StripTrailingWhitespace()
-    " To disable the stripping of whitespace, add the following to your
-    " .vimrc.local file:
-    "   let g:spf13_keep_trailing_whitespace = 1
-    if !exists('g:spf13_keep_trailing_whitespace')
-      " Preparation: save last search, and cursor position.
-      let _s=@/
-      let l = line(".")
-      let c = col(".")
-      " do the business:
-      %s/\s\+$//e
-      " clean up: restore previous search history, and cursor position
-      let @/=_s
-      call cursor(l, c)
-    endif
-  endfunction
-
 "}}}
 
 
