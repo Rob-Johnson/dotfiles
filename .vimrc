@@ -1,5 +1,3 @@
-
-"{{{ setup
 " be vim
 set nocompatible
 " load vundle
@@ -25,8 +23,6 @@ set encoding=utf-8
    call vundle#begin()
     " let Vundle manage Vundle
     Plugin 'gmarik/Vundle.vim'
-    " Nerd Tree
-    Plugin 'scrooloose/nerdtree'
     " Snipmate + dependencies
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'tomtom/tlib_vim'
@@ -215,6 +211,8 @@ au filetype crontab setlocal nobackup nowritebackup
 inoremap kj <Esc>
 " use ; as a quicker :
 map ; :
+" open netrw
+map <Leader>n :E<CR>
 " move ; to ;;
 noremap ;; ;
 " <Ctrl-l> redraws the screen and removes any search highlighting.
@@ -268,18 +266,6 @@ set t_ut=
 " my name for snippets
 let g:snips_author    = 'Rob Johnson'
 let g:haddock_browser = "/Applications/Google Chrome.app"
-" NerdTree
-map <leader>e :NERDTreeFind<CR>
-nmap <leader>nt :NERDTreeFind<CR>
-let NERDTreeShowBookmarks               = 1
-let NERDTreeIgnore                      = ['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-let NERDTreeChDirMode                   = 0
-let NERDTreeQuitOnOpen                  = 1
-let NERDTreeMouseMode                   = 2
-let NERDTreeShowHidden                  = 1
-let NERDTreeKeepTreeInNewTab            = 1
-let g:nerdtree_tabs_open_on_gui_startup = 0
-let g:NERDTreeWinSize                   = 50
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -324,10 +310,7 @@ let g:ctrlp_dotfiles = 1
 let python_highlight_all = 1
 
 autocmd BufEnter * lcd %:p:h
-" Close vim if the only left window open is NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-map <Leader>n :NERDTreeToggle<CR>
 let g:gist_private = 1
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 "}}}
@@ -381,31 +364,7 @@ augroup FTMisc
 
 "}}}
 
-"{{{ eclim stuff
-let g:EclimJavaImportExclude                = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
-let g:EclimJavaImportPackageSeparationLevel = 0
-let g:EclimJavaSearchSingleResult           = 'tabnew'
-let g:EclimValidateSortResults              = 'severity'
-let g:EclimLogLevel                         = 2
-let g:EclimSignLevel                        = 3
-let g:EclimLocateFileFuzzy                  = 0
-let g:EclimCompletionMethod                 = 'omnifunc'
 
-"Java shortcuts
-nmap §1 :JavaCorrect<CR>
-nmap §f :JavaFormat<CR>
-nmap §g :JavaSearchContext<CR>
-nmap §i :JavaImport<CR>
-nmap §o :JavaImportOrganize<CR>
-nmap §d :JavaDocPreview<CR>
-nmap §c :JavaRename
-nmap §t :JavaSearch
-nmap §r :LocateFile<CR>
-nmap §n :lnext<CR>
-nmap §p :lprev<CR>
-nmap §q :lclose<CR>
-"}}}
-"
 "{{{ go stuff 
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>e <Plug>(go-rename)
