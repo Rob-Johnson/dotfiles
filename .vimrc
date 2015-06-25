@@ -44,8 +44,6 @@ set encoding=utf-8
     Plugin 'godlygeek/tabular'
     " Tagbar
     Plugin 'majutsushi/tagbar'
-    " Preview
-    Plugin 'spf13/vim-preview'
     " Rooter
     Plugin 'airblade/vim-rooter'
     " YouCompleteMe
@@ -59,15 +57,15 @@ set encoding=utf-8
     " Markdown
     Plugin 'tpope/vim-markdown'
     " Puppet
-    Plugin 'Puppet-Syntax-Highlighting'
+    Plugin 'rodjek/vim-puppet'
     " Python
     Plugin 'hdima/python-syntax'
     " Haskell
     Plugin 'lukerandall/haskellmode-vim'
     " Go
     Plugin 'fatih/vim-go'
-    " Jinja
-    Plugin 'mitsuhiko/vim-jinja'
+    " Racket
+    Plugin 'wlangstroth/vim-racket'
     " All of your Plugins must be added before the following line
     call vundle#end()
     filetype plugin indent on
@@ -94,7 +92,7 @@ set shortmess=aI
 " always set terminal title
 set title
 " don't put ugly |s into vbars
-set fillchars=vert:\ 
+set fillchars=vert:\
 " always leave 5 lines around cursor
 set scrolloff=5
 set sidescrolloff=5
@@ -105,6 +103,9 @@ set lazyredraw
 set viewoptions=folds,options,cursor,unix,slash
 " all folds open by default
 autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
+" change the way splits are organised
+set splitbelow
+set splitright
 "}}}
 
 "{{{ whitespace
@@ -148,7 +149,7 @@ set magic
 autocmd BufNewFile,BufRead *.template set filetype=json
 " add some ruby types
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-" Haskell 
+" Haskell
 au BufEnter *.hs compiler ghc
 " use 2 spaces in xml
 au FileType xml set expandtab sw=2 sts=2
@@ -225,17 +226,16 @@ set t_ut=
 autocmd BufEnter * lcd %:p:h
 "}}}
 
-"{{{ misc plugin settings
-" my name for snippets
+"{{{ plugin settings
+" snippets
 let g:snips_author    = 'Rob Johnson'
-let g:haddock_browser = "/Applications/Google Chrome.app"
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
-" }
+"
 
 " Speed Git Gutter Up
 let g:gitgutter_eager=0
@@ -257,7 +257,6 @@ let g:ycm_filetype_blacklist = {
     \ 'tex'           : 1,
 \}
 
-
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = {
@@ -272,8 +271,7 @@ let g:ctrlp_dotfiles = 1
 " python
 let python_highlight_all = 1
 
-
-let g:gist_private = 1
+" syntastc
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 "}}}
 
@@ -307,7 +305,8 @@ augroup FTMisc
 "}}}
 
 
-"{{{ go stuff 
+"{{{ language specific
+" golang
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
