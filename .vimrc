@@ -250,7 +250,7 @@ let g:ycm_filetype_blacklist = {
     \ 'text'          : 1,
     \ 'plaintex'      : 1,
     \ 'tex'           : 1,
-}
+    \}
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
