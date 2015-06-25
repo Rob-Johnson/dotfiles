@@ -1,8 +1,9 @@
 export EDITOR=vim
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export GOPATH="$HOME/workspace/go-workspace"
+export GOSRC="$HOME/workspace/go/bin"
+export PATH=$HOME/.rbenv/bin:/usr/local/bin:$GOSRC:$GOPATH/bin:$GOROOT/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$PATH
 export GOROOT=`go env GOROOT`
-export PATH=$HOME/.rbenv/bin:/usr/local/bin:$GOPATH/bin:$GOROOT/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$PATH
 export ANSIBLE_LIBRARY=~/workspace/ansible-modules-core:~/workspace/ansible-modules-extras
 export LESS="-nXR"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
