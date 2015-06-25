@@ -42,8 +42,6 @@ set encoding=utf-8
     Plugin 'airblade/vim-gitgutter'
     " Tabularize
     Plugin 'godlygeek/tabular'
-    " Tagbar
-    Plugin 'majutsushi/tagbar'
     " Rooter
     Plugin 'airblade/vim-rooter'
     " YouCompleteMe
@@ -227,9 +225,6 @@ autocmd BufEnter * lcd %:p:h
 "}}}
 
 "{{{ plugin settings
-" snippets
-let g:snips_author    = 'Rob Johnson'
-
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -255,14 +250,13 @@ let g:ycm_filetype_blacklist = {
     \ 'text'          : 1,
     \ 'plaintex'      : 1,
     \ 'tex'           : 1,
-\}
+}
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = {
     \ 'types': {
         \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \  },
     \ 'fallback': 'find %s -type f'
 \ }
@@ -299,9 +293,7 @@ augroup FTMisc
         \ endif
   " allow browsing inside jars
   autocmd BufReadCmd *.jar call zip#Browse(expand("<amatch>"))
-  augroup END
-
-  
+augroup END
 "}}}
 
 
