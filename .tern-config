@@ -1,9 +1,0 @@
-{
-  "libs": [
-    "jquery"
-   ],
-  "plugins": {
-    "node":{},
-    "angular":{}
-  }
-}
