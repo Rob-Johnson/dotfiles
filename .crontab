@@ -1,0 +1,6 @@
+# write `brew list` every hour
+0 * * * * /usr/local/bin/brew list > /Users/robj/.brewlist
+
+# get emails every 2 mins
+* * * * * . /Users/robj/.gpg-agent-info ; GPG_TTY=`tty` /usr/local/bin/mbsync personal &> /Users/robj/mbsync.out
+ 
