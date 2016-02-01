@@ -1,0 +1,21 @@
+# rob@rob-johnson.me
+IMAPAccount personal
+Host imap-mail.outlook.com
+User rob@rob-johnson.me
+PassCmd "/usr/local/bin/gpg2 -q --for-your-eyes-only --batch --no-tty -d /Users/robj/outlook.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+Path ~/.mail/rob@rob-johnson.me/
+Inbox ~/.mail/rob@rob-johnson.me/inbox/
+
+Channel personal
+Master :personal-remote:
+Slave :personal-local:
+Patterns *
+Create Both
+SyncState *

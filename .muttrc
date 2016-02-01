@@ -1,0 +1,27 @@
+set folder = ~/.mail
+
+
+set spoolfile = "+rob@rob-johnson.me/Inbox
+set mbox      = "+rob@rob-johnson.me/Archive"
+set postponed = "+rob@rob-johnson.me/Drafts"
+set editor        = "vim -c \"set spell spelllang=en\""
+
+# Sidebar Patch --------------------------------------
+set sidebar_delim   = '  │'
+set sidebar_visible = yes
+set sidebar_width   = 50
+color sidebar_new color221 color233
+
+# Status Bar -----------------------------------------
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Account Settings -----------------------------------
+
+# Default inbox.
+mailboxes   +rob@rob-johnson.me/Inbox
+
+# ordering
+set sort=threads
+set sort_browser=date
+set sort_aux=reverse-last-date-received
