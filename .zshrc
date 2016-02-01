@@ -1,5 +1,3 @@
-autoload colors && colors
-
 ##load any config files
 for file in $(ls ~/*.zsh)
 do
@@ -7,20 +5,9 @@ do
 done
 
 autoload -U compinit && compinit
-function directory_name
-{
-    echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
-}
-
-function ruby_version
-{
-  if which rbenv &> /dev/null; then
-    echo "%{$fg_bold[red]%}$(rbenv version 2>/dev/null| awk '{print $1}')%{$reset_color%}"
-  fi
-}
 
 function git_branch {
-  echo "%{$fg_bold[yellow]%}$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})%{$reset_color%}"
+  echo "$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})"
 }
 
 function fsup {
@@ -36,10 +23,6 @@ function client_token {
 
 function ansible-env {
   source ~/workspace/ansible/hacking/env-setup
-}
-
-function discovery {
-  curl -w "\n" https://discovery.etcd.io/new
 }
 
 # Lots of command examples (especially heroku) lead command docs with '$' which
@@ -62,4 +45,26 @@ function kill-container() {
 }
 
 
-PROMPT='$(directory_name) $(git_branch) >> '
+# keep a dirstack
+# https://wiki.archlinux.org/index.php/Zsh#Dirstac
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+DIRSTACKSIZE=50
+
+setopt autopushd pushdsilent pushdtohome
+
+## Remove duplicate entries
+setopt pushdignoredups
+
+### This reverts the +/- operators.
+setopt pushdminus
+
+# user@hostname:cur_dir git_branch %
+PROMPT='%n@%m:${PWD/#$HOME/~} $(git_branch) %% '
