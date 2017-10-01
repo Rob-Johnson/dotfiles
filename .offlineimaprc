@@ -12,7 +12,7 @@ postsynchook = ~/bin/notmuch-new
 
 [Repository local]
 type = Maildir
-localfolders = /home/robj/Test.new
+localfolders = /home/robj/mail
 
 # if the folder is one of the 'stock' folders that can't be changed, then convert to capitalized form, else just keep in lower case
 nametrans = lambda folder: folder.capitalize() if folder in ['inbox', 'junk', 'drafts', 'sent', 'deleted', 'archive', 'trash', 'notes', 'outbox'] else folder
