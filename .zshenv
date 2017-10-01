@@ -8,9 +8,6 @@ export ANSIBLE_LIBRARY=~/workspace/ansible-modules-core:~/workspace/ansible-modu
 export LESS="-nXR"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export PYTHONSTARTUP=~/.pythonrc
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/robj/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
 if [ -f "$HOME/.api_keys" ]; then
   source ~/.api_keys
 fi
