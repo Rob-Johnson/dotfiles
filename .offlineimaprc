@@ -1,0 +1,32 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# get started fast.
+
+[general]
+accounts = Personal
+pythonfile = ~/offlineimap.py
+
+[Account Personal]
+localrepository = local
+remoterepository = remote
+postsynchook = ~/bin/notmuch-new
+
+[Repository local]
+type = Maildir
+localfolders = /home/robj/Test.new
+
+# if the folder is one of the 'stock' folders that can't be changed, then convert to capitalized form, else just keep in lower case
+nametrans = lambda folder: folder.capitalize() if folder in ['inbox', 'junk', 'drafts', 'sent', 'deleted', 'archive', 'trash', 'notes', 'outbox'] else folder
+
+[Repository remote]
+auth_mechanisms = GSSAPI, CRAM-MD5, PLAIN, LOGIN 
+type = IMAP
+remotehost = imap-mail.outlook.com
+remoteuser = rob@rob-johnson.me
+remoteport = 993
+remotepasseval = mailpasswd()
+maxconnections = 7
+ssl = yes
+ssl_version=ssl23
+tls_level=tls_compat
+sslcacertfile=/usr/local/share/certs/ca-root-nss.crt
+nametrans = lambda folder: folder.lower()
