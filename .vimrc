@@ -64,6 +64,7 @@ set encoding=utf-8
     Plugin 'fatih/vim-go'
     " Racket
     Plugin 'wlangstroth/vim-racket'
+    Plugin 'bhurlow/vim-parinfer'
     " All of your Plugins must be added before the following line
     call vundle#end()
     filetype plugin indent on
