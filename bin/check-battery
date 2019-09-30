@@ -1,0 +1,23 @@
+#!/bin/sh
+
+status=$(apm | grep 'Battery Status' | head -1 | awk -F ":" '{ print $NF }'|xargs echo -n)
+if [ "$status" != "charging" ]; then
+  life=$(apm | grep "Remaining battery life" | head -1 |awk -F ":" '{print $NF}' )
+  if [ $(echo "$life" | sed s/%//) -lt 10 ]; then
+    if [ -f /tmp/battery-warn.txt ]; then
+      mtime=$(stat -f %m /tmp/battery-warn.txt)
+      date=$(date +%s)
+      diff=$((date - mtime))
+      if [ "$diff" -gt 60 ]; then
+        notify-send "Battery Low" "$life"
+        touch /tmp/battery-warn.txt
+      fi
+    else
+      notify-send "Battery Low" "$life"
+      touch /tmp/battery-warn.txt
+    fi
+  fi
+fi
+
+echo $(date) > /tmp/battery-check-last-run
+  
