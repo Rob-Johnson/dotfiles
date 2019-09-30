@@ -2,7 +2,7 @@ export EDITOR=vim
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export GOPATH="$HOME/workspace/go-workspace"
 export GOSRC="$HOME/workspace/go/bin"
-export PATH=$HOME/.rbenv/bin:/usr/local/bin:$GOSRC:$GOPATH/bin:$GOROOT/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$PATH
+export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$HOME/.rbenv/bin:/usr/local/bin:$GOSRC:$GOPATH/bin:$GOROOT/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$PATH
 export GOROOT=`go env GOROOT`
 export ANSIBLE_LIBRARY=~/workspace/ansible-modules-core:~/workspace/ansible-modules-extras
 export LESS="-nXR"
@@ -19,3 +19,4 @@ fi
 
 GPG_TTY=$(tty)
 export GPG_TTY
+export PYTHONPATH=$(brew --prefix python3)

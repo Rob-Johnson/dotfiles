@@ -1,0 +1,1 @@
+sudo SSH_AUTH_SOCK="$SSH_AUTH_SOCK" rsync -e "ssh -A -l $USER" --rsync-path="sudo rsync" "$@"

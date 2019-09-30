@@ -5,7 +5,7 @@ try:
   import rlcompleter
   import atexit
 except ImportError as e:
-  print e.message
+  print(e.message)
 else:
   history_file = os.path.join(os.environ['HOME'], '.python_history')
   try:
