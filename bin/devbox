@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+mosh --forward-agent --server /nail/home/robj/bin/mosh-server devbox

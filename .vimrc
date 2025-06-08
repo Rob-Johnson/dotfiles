@@ -1,10 +1,3 @@
-" be vim
-set nocompatible
-" load vundle
-filetype off
-"}}}
-
-
 "{{{ paths
 " put backups out of the way
 set directory=~/.vim/swp
@@ -13,98 +6,117 @@ set backupdir=~/.vim/backup/
 set undodir=~/.vim/undo
 set undolevels=1000
 set undoreload=10000
+set undofile
 " always use utf8
 set encoding=utf-8
 "}}}
 
-"vundle before everything else
-"{{{ vundle
-  set rtp+=~/.vim/bundle/Vundle.vim
-   call vundle#begin()
-    " let Vundle manage Vundle
-    Plugin 'gmarik/Vundle.vim'
-    " Snipmate + dependencies
-    Plugin 'MarcWeber/vim-addon-mw-utils'
-    Plugin 'tomtom/tlib_vim'
-    " Syntastic
-    Plugin 'scrooloose/syntastic'
-    " CtrlP
-    Plugin 'kien/ctrlp.vim'
-    " Surround
-    Plugin 'tpope/vim-surround'
-    " Fugitive
-    Plugin 'tpope/vim-fugitive'
-    " Autoclose
-    Plugin 'spf13/vim-autoclose'
-    " Vim Indent Guides
-    Plugin 'nathanaelkane/vim-indent-guides'
-    " Gutter
-    Plugin 'airblade/vim-gitgutter'
-    " Tabularize
-    Plugin 'godlygeek/tabular'
-    " Rooter
-    Plugin 'airblade/vim-rooter'
-    " YouCompleteMe
-    Plugin 'Valloric/YouCompleteMe'
-    " Comments
-    Plugin 'scrooloose/nerdcommenter'
-    " Colors
-    Plugin 'flazz/vim-colorschemes'
+"{{{ plugins - vim-plug
+call plug#begin('~/.vim/plugged')
+    " Core plugins
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-commentary'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'godlygeek/tabular'
+    Plug 'airblade/vim-rooter'
+    
+    " UI and navigation
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'Yggdroot/indentLine'
+    
+    " Git integration  
+    Plug 'airblade/vim-gitgutter'
+    
+    " Linting and completion
+    Plug 'dense-analysis/ale'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    
+    " Color schemes
+    Plug 'morhetz/gruvbox'
+    Plug 'tomasr/molokai'
+    
+    " Language support
+    Plug 'plasticboy/vim-markdown'
+    Plug 'rodjek/vim-puppet'
+    Plug 'vim-python/python-syntax'
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'wlangstroth/vim-racket'
+    Plug 'bhurlow/vim-parinfer'
+    
+call plug#end()
+filetype plugin indent on
+"}}}
 
-    "Language Plugins
-    " Markdown
-    Plugin 'tpope/vim-markdown'
-    " Puppet
-    Plugin 'rodjek/vim-puppet'
-    " Python
-    Plugin 'hdima/python-syntax'
-    " Haskell
-    Plugin 'lukerandall/haskellmode-vim'
-    " Go
-    Plugin 'fatih/vim-go'
-    " Racket
-    Plugin 'wlangstroth/vim-racket'
-    Plugin 'bhurlow/vim-parinfer'
-    " All of your Plugins must be added before the following line
-    call vundle#end()
-    filetype plugin indent on
-" }}}
+"{{{ modern terminal support
+" True color support for ghostty
+if has('termguicolors')
+  set termguicolors
+endif
+
+" Better terminal integration
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" Mouse support
+set mouse=a
+
+" Clipboard integration
+if has('clipboard')
+  set clipboard=unnamedplus
+endif
+"}}}
+
+"{{{ completion and wildmenu
+set wildmenu
+set wildmode=longest:full,full
+set wildignore+=*.o,*.obj,*.bin,*.dll,*.exe
+set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/node_modules/*
+set completeopt=menu,menuone,noselect
+"}}}
 
 "{{{ ui
-" Color Scheme in termial vim
-colorscheme molokai
-set background=dark
-" show line numbers
+" Color scheme
+try
+  colorscheme gruvbox
+  set background=dark
+catch
+  colorscheme molokai
+  set background=dark
+endtry
+
+" Line numbers with relative for better navigation
 set number
-" show file position
+set relativenumber
+
+" UI improvements
 set ruler
-" show column
-set cursorcolumn
-" show line
 set cursorline
-" always show status bar
 set laststatus=2
-" make backspace do what you expect
 set backspace=indent,eol,start
-" use abbreviations in messages
-set shortmess=aI
-" always set terminal title
+set shortmess+=c
 set title
-" don't put ugly |s into vbars
-set fillchars=vert:\
-" always leave 5 lines around cursor
-set scrolloff=5
-set sidescrolloff=5
-" save history
-set viminfo=/50,'50,:50,h
-" don't update screen for macros
+set fillchars=vert:│,fold:·,diff:·
+set scrolloff=8
+set sidescrolloff=8
+set signcolumn=yes
+
+" Performance
 set lazyredraw
-set viewoptions=folds,options,cursor,unix,slash
-" all folds open by default
-autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
-" change the way splits are organised
+set updatetime=300
+set timeoutlen=500
+
+" Split behavior
 set splitbelow
 set splitright
+
+" Better folding
+set foldmethod=indent
+set foldlevelstart=10
+set foldnestmax=10
 "}}}
 
 "{{{ whitespace
@@ -124,8 +136,11 @@ set autoindent
 "}}}
 
 "{{{ syntax
-syntax on
-set t_Co=256
+syntax enable
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
 "}}}
 
 "{{{ search
@@ -174,23 +189,27 @@ au filetype crontab setlocal nobackup nowritebackup
 map ; :
 " move ; to ;;
 noremap ;; ;
-" <Ctrl-l> redraws the screen and removes any search highlighting.
+" Clear search highlighting
 nnoremap <silent> <C-l> :nohl<CR><C-l>
-" press F2 before a paste to turn off autoindent
+" Paste mode toggle
 set pastetoggle=<F2>
-" create blank line without entering insert
+" Create blank lines without entering insert
 nnoremap <silent> zj o<Esc>
 nnoremap <silent> zk O<Esc>
-" w!! to save with sudo
-cmap w!! %!sudo tee > /dev/null %
-" use space to pagedown
-noremap <Space> <PageDown>
-" Default leader is \ replace with ,
+" Save with sudo
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+" Leader key
 let mapleader = ','
-" Yank from the cursor to the end of the line, to be consistent with C and D.
+let maplocalleader = '\\'
+" Consistent with C and D
 nnoremap Y y$
-" open file explorer with <leader>n
-map <Leader>n :Ex<CR>
+" File explorer
+nnoremap <Leader>n :Explore<CR>
+" FZF shortcuts
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>f :Rg<CR>
+nnoremap <Leader>h :History<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
@@ -218,91 +237,100 @@ imap <right> <nop>
 "{{{ misc vim settings
 set autowrite
 set virtualedit=block
-set modifiable
-"Fix 256-color
-set t_ut=
-" change the current working directory to that of the file
-autocmd BufEnter * lcd %:p:h
+set hidden
+set confirm
+set autoread
 "}}}
 
 "{{{ plugin settings
 " Fugitive
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gs :Git<CR>
+nnoremap <silent> <leader>gc :Git commit<CR>
+nnoremap <silent> <leader>gb :Git blame<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
-"
+nnoremap <silent> <leader>gl :Git log --oneline<CR>
 
-" Speed Git Gutter Up
-let g:gitgutter_eager=0
-let g:gitgutter_realtime = 0
+" ALE (Async Lint Engine)
+let g:ale_enabled = 1
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
 
-" YouCompleteMe
-let g:ycm_seed_identifiers_with_syntax = 1
-" dont want any random buffers popping up
-set completeopt-=preview
-" close the completion window once I've made a selection 
-let g:ycm_add_preview_to_completeopt = 0
-" prevent interference with eclim locate buffer"
-let g:ycm_filetype_blacklist = {
-    \ 'locate_prompt' : 1,
-    \ 'notes'         : 1,
-    \ 'markdown'      : 1,
-    \ 'text'          : 1,
-    \ 'plaintex'      : 1,
-    \ 'tex'           : 1,
-    \}
+" CoC (Conquer of Completion)
+let g:coc_global_extensions = [
+  \ 'coc-json',
+  \ 'coc-python',
+  \ 'coc-go',
+  \ 'coc-rust-analyzer',
+  \ 'coc-yaml',
+  \ 'coc-vimlsp'
+  \ ]
 
-" ctrlp
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = {
-    \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-    \  },
-    \ 'fallback': 'find %s -type f'
-\ }
-let g:ctrlp_dotfiles = 1
+" FZF
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+let g:fzf_layout = { 'down': '~40%' }
 
-" python
-let python_highlight_all = 1
+" Airline
+let g:airline_theme = 'gruvbox'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#branch#enabled = 1
 
-" syntastc
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
+" Python syntax
+let g:python_highlight_all = 1
+
+" IndentLine
+let g:indentLine_char = '│'
+let g:indentLine_enabled = 1
 "}}}
 
 "{{{ clever bits
-" remember last file location
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-        \| exe "normal g'\"" | endif
-endif
 
-augroup FTMisc
-  " save when losing focus, update fugitive status when gaining
-  autocmd FocusLost   * silent! wall
-  autocmd FocusGained * silent! call fugitive#reload_status()
-
-  " chmod +x new files on save if they start with hashbang
-  autocmd BufNewFile  * let b:chmod_exe=1
-  autocmd BufWritePre * if exists("b:chmod_exe") |
-        \ unlet b:chmod_exe |
-        \ if getline(1) =~ '^#!' | let b:chmod_new="+x" | endif |
-      \ endif
-  autocmd BufWritePost,FileWritePost * if exists("b:chmod_new")|
-        \ silent! execute "!chmod ".b:chmod_new." <afile>"|
-        \ unlet b:chmod_new|
-        \ endif
-  " allow browsing inside jars
-  autocmd BufReadCmd *.jar call zip#Browse(expand("<amatch>"))
+augroup VimrcAutocmds
+  autocmd!
+  " Save when losing focus
+  autocmd FocusLost * silent! wall
+  
+  " Auto-reload files changed outside of vim
+  autocmd FocusGained,BufEnter * silent! checktime
+  
+  " Make executable if shebang present
+  autocmd BufWritePost * if getline(1) =~ '^#!' | silent execute '!chmod +x <afile>' | endif
+  
+  " Remove trailing whitespace on save
+  autocmd BufWritePre * %s/\s\+$//e
+  
+  " Return to last edit position
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
 "}}}
 
 
 "{{{ language specific
-" golang
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>e <Plug>(go-rename)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-"}}}"
+" Go
+augroup GoSettings
+  autocmd!
+  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  autocmd FileType go nmap <Leader>e <Plug>(go-rename)
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>gr <Plug>(go-run)
+  autocmd FileType go nmap <Leader>gt <Plug>(go-test)
+augroup END
+
+" Enhanced tmux integration
+if exists('$TMUX')
+  " Better color support in tmux
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  
+  " Better split navigation
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
+endif
+"}}}
 "
 " vim: set foldmethod=marker:

@@ -1,13 +1,46 @@
-##load any config files
-for file in $(ls ~/*.zsh)
-do
-  source $file
+# Modern ZSH configuration with Ghostty integration
+# Enable Ghostty shell integration early
+if [[ -n "${GHOSTTY_RESOURCES_DIR}" ]]; then
+  source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+fi
+
+# Load config files
+for file in ~/.config/zsh/*.zsh(N) ~/*.zsh(N); do
+  [[ -r "$file" ]] && source "$file"
 done
 
-autoload -U compinit && compinit
+# Enhanced completion system
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
-function git_branch {
-  echo "$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})"
+# Load modern completion enhancements
+autoload -Uz bashcompinit && bashcompinit
+
+# Enhanced Git prompt with status indicators
+function git_info() {
+  local branch_name
+  local git_status
+  local git_info
+  
+  if ! git rev-parse --git-dir &>/dev/null; then
+    return 0
+  fi
+  
+  branch_name=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+  
+  if [[ -n $branch_name ]]; then
+    git_status=$(git status --porcelain 2>/dev/null)
+    if [[ -n $git_status ]]; then
+      git_info="%F{yellow}${branch_name}*%f"
+    else
+      git_info="%F{green}${branch_name}%f"
+    fi
+    echo " $git_info"
+  fi
 }
 
 function fsup {
@@ -66,5 +99,8 @@ setopt pushdignoredups
 ### This reverts the +/- operators.
 setopt pushdminus
 
-# user@hostname:cur_dir git_branch %
-PROMPT='%n@%m:${PWD/#$HOME/~} $(git_branch) %% '
+# Enhanced prompt with Git info and exit status
+PROMPT='%F{cyan}%n@%m%f:%F{blue}%~%f$(git_info) %(?..%F{red}[%?]%f )%# '
+
+# Right prompt with timestamp (optional)
+# RPROMPT='%F{242}%D{%H:%M:%S}%f'
