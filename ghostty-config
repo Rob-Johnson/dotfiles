@@ -1,0 +1,18 @@
+# Ghostty Configuration - Optimized for tmux + SSH workflow
+# Only settings that improve over defaults for your specific use case
+
+# Fix mouse copy/paste issues in tmux
+# Default: false - changing this enables better mouse interaction with tmux
+mouse-shift-capture = true
+
+# Improve copy/paste across macOS and SSH to Ubuntu
+# Default on macOS: true (selection only) - this ensures system clipboard too
+copy-on-select = clipboard
+
+# Better terminal identification for complex applications
+# Default: varies - this ensures consistent terminal capabilities
+term = xterm-ghostty
+
+# Safety when pasting commands across different systems
+# Protects against accidentally pasting dangerous commands
+clipboard-paste-protection = true
