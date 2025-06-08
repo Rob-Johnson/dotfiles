@@ -2,6 +2,7 @@
 !.*
 !*.zsh
 !*bin/
+!install.sh
 .Bome/
 .DS_Store
 .EasyPmd2/
