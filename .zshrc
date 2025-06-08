@@ -5,6 +5,9 @@ if [[ -n "${GHOSTTY_RESOURCES_DIR}" ]]; then
 fi
 
 # Load config files
+# Create zsh config directory if it doesn't exist
+[[ ! -d "$HOME/.config/zsh" ]] && mkdir -p "$HOME/.config/zsh"
+
 for file in ~/.config/zsh/*.zsh(N) ~/*.zsh(N); do
   [[ -r "$file" ]] && source "$file"
 done
@@ -81,6 +84,10 @@ function kill-container() {
 # keep a dirstack
 # https://wiki.archlinux.org/index.php/Zsh#Dirstac
 DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+# Create cache directory and file if they don't exist
+[[ ! -d "$HOME/.cache/zsh" ]] && mkdir -p "$HOME/.cache/zsh"
+[[ ! -f $DIRSTACKFILE ]] && touch $DIRSTACKFILE
+
 if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
   [[ -d $dirstack[1] ]] && cd $dirstack[1]

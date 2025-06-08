@@ -1,4 +1,15 @@
 "{{{ paths
+" Create vim directories if they don't exist
+if !isdirectory($HOME."/.vim/swp")
+    call mkdir($HOME."/.vim/swp", "p")
+endif
+if !isdirectory($HOME."/.vim/backup")
+    call mkdir($HOME."/.vim/backup", "p")
+endif
+if !isdirectory($HOME."/.vim/undo")
+    call mkdir($HOME."/.vim/undo", "p")
+endif
+
 " put backups out of the way
 set directory=~/.vim/swp
 set backupdir=~/.vim/backup/
