@@ -29,6 +29,7 @@ fi
 typeset -U path  # Remove duplicates automatically
 path=(
   $HOME/bin
+  $HOME/.bun/bin           # bun global packages (qmd, etc.)
   /opt/homebrew/bin        # macOS Homebrew (Apple Silicon)
   /usr/local/bin           # macOS Homebrew (Intel) / Linux
   /usr/local/opt/gnu-tar/libexec/gnubin  # GNU tar on macOS

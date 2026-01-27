@@ -111,3 +111,4 @@ PROMPT='%F{cyan}%n@%m%f:%F{blue}%~%f$(git_info) %(?..%F{red}[%?]%f )%# '
 
 # Right prompt with timestamp (optional)
 # RPROMPT='%F{242}%D{%H:%M:%S}%f'
+
