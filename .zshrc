@@ -12,6 +12,11 @@ for file in ~/.config/zsh/*.zsh(N) ~/*.zsh(N); do
   [[ -r "$file" ]] && source "$file"
 done
 
+# Poetry completions (fpath must be set before compinit)
+if command -v poetry >/dev/null 2>&1; then
+  fpath=(~/.zfunc $fpath)
+fi
+
 # Enhanced completion system
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
