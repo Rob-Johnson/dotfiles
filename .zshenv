@@ -1,10 +1,28 @@
+# Enhanced environment setup with cross-platform compatibility
+# Ghostty terminal optimization
+if [[ "$TERM" == "xterm-ghostty" ]]; then
+  # Ensure proper terminal capabilities are recognized
+  export COLORTERM=truecolor
+fi
+
 export EDITOR=vim
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export GOPATH="$HOME/workspace/go-workspace"
-export GOSRC="$HOME/workspace/go/bin"
-export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$HOME/.rbenv/bin:/usr/local/bin:$GOSRC:$GOPATH/bin:$GOROOT/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$PATH
-export GOROOT=`go env GOROOT`
-export ANSIBLE_LIBRARY=~/workspace/ansible-modules-core:~/workspace/ansible-modules-extras
+
+# Java setup (macOS only, with fallback)
+if [[ "$OSTYPE" == darwin* ]] && command -v /usr/libexec/java_home >/dev/null 2>&1; then
+  export JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null || echo '')"
+fi
+
+# Go workspace (GOROOT set in .zprofile after brew is in PATH)
+export GOPATH="${GOPATH:-$HOME/go}"
+[[ ! -d "$GOPATH" ]] && mkdir -p "$GOPATH"
+
+# Create workspace directory structure
+[[ ! -d "$HOME/workspace" ]] && mkdir -p "$HOME/workspace"
+
+# Ansible configuration (modern collections-based approach)
+if command -v ansible >/dev/null 2>&1; then
+  export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections"
+fi
 export LESS="-nXR"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export PYTHONSTARTUP=~/.pythonrc
@@ -19,4 +37,3 @@ fi
 
 GPG_TTY=$(tty)
 export GPG_TTY
-export PYTHONPATH=$(brew --prefix python3)

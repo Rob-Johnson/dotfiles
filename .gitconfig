@@ -6,9 +6,9 @@
 [core]
   excludesfile = ~/global_osx.gitignore
   whitespace = tab-in-indent,tabwidth=4
-  fsyncobjectfiles = true
   preloadindex = true
   pager = less
+  fsync = objects
 [diff]
   mnemonicprefix = true
   renames = copy

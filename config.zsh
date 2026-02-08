@@ -1,7 +1,8 @@
-##zsh config
+# Enhanced ZSH configuration
+# History settings
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 
 setopt PROMPT_SUBST
 setopt NO_BG_NICE # don't nice background tasks
@@ -47,7 +48,7 @@ else
 fi
 
 # use /etc/hosts and known_hosts for hostname completion
-[ -r /etc/ssh/ssh_known_hosts ] && _global_ssh_hosts=(${${${${(f)"$(</etc/ssh/ssh_known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _ssh_hosts=()
+[ -r /etc/ssh/ssh_known_hosts ] && _global_ssh_hosts=(${${${${(f)"$(</etc/ssh/ssh_known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _global_ssh_hosts=()
 [ -r ~/.ssh/known_hosts ] && _ssh_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _ssh_hosts=()
 [ -r /etc/hosts ] && : ${(A)_etc_hosts:=${(s: :)${(ps:\t:)${${(f)~~"$(</etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}}} || _etc_hosts=()
 hosts=(
@@ -59,15 +60,26 @@ hosts=(
 )
 zstyle ':completion:*:hosts' hosts $hosts
 
-# fix backwards history search
+# Enhanced key bindings
+# History search
 bindkey -M viins "^r" history-incremental-search-backward
 bindkey -M vicmd "^r" history-incremental-search-backward
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
+# Better word navigation
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# Alt+left/right for word navigation (Ghostty compatible)
+bindkey "^[^[[C" forward-word
+bindkey "^[^[[D" backward-word
 
 #enable advanced globbing
 setopt extended_glob
 
 #colors
-export TERM=xterm-256color
+#eexport TERM=xterm-256color
 
 
 ###

@@ -2,6 +2,8 @@
 !.*
 !*.zsh
 !*bin/
+!install.sh
+!ghostty-config
 .Bome/
 .DS_Store
 .EasyPmd2/
