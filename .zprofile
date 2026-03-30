@@ -24,6 +24,7 @@ typeset -U path
 path=(
   $HOME/bin
   $HOME/.local/bin         # Poetry, pipx, and other Python tools
+  $HOME/.npm-global/bin    # npm global packages with custom prefix
   $HOME/.bun/bin           # bun global packages (qmd, etc.)
   /opt/homebrew/bin        # macOS Homebrew (Apple Silicon)
   /usr/local/bin           # macOS Homebrew (Intel) / Linux
