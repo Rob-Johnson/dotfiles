@@ -4,7 +4,7 @@
 [color]
   ui = auto
 [core]
-  excludesfile = ~/global_osx.gitignore
+	excludesfile = ~/.gitignore_global
   whitespace = tab-in-indent,tabwidth=4
   preloadindex = true
   pager = less
@@ -36,4 +36,4 @@
 [push]
 	default = upstream
 [credential]
-	helper = osxkeychain
+	helper = !sh -c 'command -v git-credential-osxkeychain >/dev/null 2>&1 && exec git-credential-osxkeychain "$1" || command -v git-credential-libsecret >/dev/null 2>&1 && exec git-credential-libsecret "$1" || exec git credential-cache --timeout=3600 "$1"' -

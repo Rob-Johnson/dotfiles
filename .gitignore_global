@@ -1,0 +1,7 @@
+# Global Git ignores
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+*.swp
+*.swo
