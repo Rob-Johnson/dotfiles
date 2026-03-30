@@ -8,7 +8,7 @@ fi
 # Create zsh config directory if it doesn't exist
 [[ ! -d "$HOME/.config/zsh" ]] && mkdir -p "$HOME/.config/zsh"
 
-for file in ~/.config/zsh/*.zsh(N) ~/*.zsh(N); do
+for file in ~/.config/zsh/*.zsh(N) ~/.*.zsh(N) ~/*.zsh(N); do
   [[ -r "$file" ]] && source "$file"
 done
 
