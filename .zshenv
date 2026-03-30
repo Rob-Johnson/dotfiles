@@ -24,7 +24,9 @@ if command -v ansible >/dev/null 2>&1; then
   export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections"
 fi
 export LESS="-nXR"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+if [[ "$OSTYPE" == darwin* ]]; then
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+fi
 export PYTHONSTARTUP=~/.pythonrc
 if [ -f "$HOME/.api_keys" ]; then
   source ~/.api_keys
