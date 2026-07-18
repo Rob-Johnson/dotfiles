@@ -37,5 +37,10 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
   export GPG_AGENT_INFO
 fi
 
+# Supply the Workspace Cloud Code Assist project to Pi's Gemini auth plugin.
+function pi() {
+  GOOGLE_CLOUD_PROJECT="${GOOGLE_CLOUD_PROJECT:-involuted-fold-502806-r1}" command pi "$@"
+}
+
 GPG_TTY=$(tty)
 export GPG_TTY
