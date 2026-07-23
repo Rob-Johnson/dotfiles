@@ -2,7 +2,7 @@
 
 set -eu
 
-expectation=${1:---expect-blocked}
+expectation=${1:---expect-propagated}
 case "$expectation" in
   --expect-blocked | --expect-propagated) ;;
   *)
@@ -26,6 +26,7 @@ outer_socket="clipboard-outer-$$"
 inner_socket="clipboard-inner-$$"
 remote_config="/tmp/tmux-clipboard-$$.conf"
 sentinel="nested-clipboard-sentinel-$$"
+encoded=$(printf '%s\n' "$sentinel" | base64 | tr -d '\r\n')
 capture="$tmp_dir/terminal-output"
 
 remote() {
@@ -36,12 +37,16 @@ cleanup() {
   tmux -L "$outer_socket" kill-server 2>/dev/null || true
   remote "tmux -L '$inner_socket' kill-server; rm -f '$remote_config'" \
     >/dev/null 2>&1 || true
-  rm -rf "$tmp_dir"
+  if [ "${TMUX_TEST_KEEP_TMP:-0}" = 1 ]; then
+    echo "kept test output in $tmp_dir" >&2
+  else
+    rm -rf "$tmp_dir"
+  fi
 }
 trap cleanup EXIT HUP INT TERM
 
 remote "cat >'$remote_config'" <"$repo_dir/.tmux.conf"
-remote "tmux -L '$inner_socket' -f '$remote_config' new-session -d 'sleep 120'"
+remote "tmux -L '$inner_socket' -f '$remote_config' new-session -d \"printf '%s' '$sentinel'; sleep 120\""
 
 # The broken configuration advertises the physical terminal as tmux's output
 # terminal. Force the intended TERM in reproduction mode so the test reaches
@@ -49,32 +54,37 @@ remote "tmux -L '$inner_socket' -f '$remote_config' new-session -d 'sleep 120'"
 term_prefix=
 if [ "$expectation" = "--expect-blocked" ]; then
   term_prefix="env TERM=tmux-256color "
+  clipboard_wait="after 2000"
+else
+  clipboard_wait="expect -re $encoded"
 fi
 
 cat >"$tmp_dir/attach.exp" <<EOF
 set timeout 20
 spawn -noecho env TERM=xterm-ghostty tmux -L $outer_socket -f $repo_dir/.tmux.conf new-session "${term_prefix}ssh -tt -p $test_port -o BatchMode=yes $test_host 'tmux -L $inner_socket attach'"
-expect -re $test_host
-after 2000
-exec sh -c { ssh -p $test_port -o BatchMode=yes $test_host 'client=\$(tmux -L $inner_socket list-clients -F "#{client_name}"); test -n "\$client" || exit 1; tmux -L $inner_socket list-clients -F "#{client_termname}"; tmux -L $inner_socket set-buffer -w -t "\$client" "$sentinel"' >$tmp_dir/inner-term }
-after 2000
+after 500
+exec sh -c { ssh -p $test_port -o BatchMode=yes $test_host 'attempt=0; client=; while test "\$attempt" -lt 300; do client=\$(tmux -L $inner_socket list-clients -F "#{client_name}"); test -n "\$client" && break; attempt=\$((attempt + 1)); sleep 0.1; done; test -n "\$client" || exit 1; sleep 1; tmux -L $inner_socket list-clients -F "#{client_termname}"; pane=\$(tmux -L $inner_socket list-panes -F "#{pane_id}"); tmux -L $inner_socket copy-mode -t "\$pane"; tmux -L $inner_socket send-keys -X -t "\$pane" start-of-line; tmux -L $inner_socket send-keys -X -t "\$pane" begin-selection; tmux -L $inner_socket send-keys -X -t "\$pane" end-of-line; tmux -L $inner_socket send-keys -X -t "\$pane" copy-selection-and-cancel' >$tmp_dir/inner-term }
+$clipboard_wait
 exec sh -c { client=\$(tmux -L $outer_socket list-clients -F '#{client_name}'); tmux -L $outer_socket detach-client -t "\$client" }
 expect eof
 EOF
 
-expect "$tmp_dir/attach.exp" >"$capture" 2>&1
+if ! expect "$tmp_dir/attach.exp" >"$capture" 2>&1; then
+  echo "nested tmux driver failed:" >&2
+  tail -20 "$capture" >&2
+  exit 1
+fi
 
 inner_buffer=$(remote "tmux -L '$inner_socket' show-buffer")
 inner_term=$(cat "$tmp_dir/inner-term")
 outer_buffer=$(tmux -L "$outer_socket" show-buffer 2>/dev/null || true)
-encoded=$(printf %s "$sentinel" | base64 | tr -d '\r\n')
 
 if [ "$inner_buffer" != "$sentinel" ]; then
   echo "inner tmux did not retain the copied text" >&2
   exit 1
 fi
-if [ "$outer_buffer" != "$sentinel" ]; then
-  echo "outer tmux did not receive the inner OSC 52 write" >&2
+if [ "$expectation" = "--expect-blocked" ] && [ "$outer_buffer" != "$sentinel" ]; then
+  echo "outer tmux did not consume the inner OSC 52 write" >&2
   exit 1
 fi
 if [ "$inner_term" != "tmux-256color" ]; then
