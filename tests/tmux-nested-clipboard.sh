@@ -77,7 +77,9 @@ fi
 
 inner_buffer=$(remote "tmux -L '$inner_socket' show-buffer")
 inner_term=$(cat "$tmp_dir/inner-term")
+inner_prefix=$(remote "tmux -L '$inner_socket' show -gv prefix")
 outer_buffer=$(tmux -L "$outer_socket" show-buffer 2>/dev/null || true)
+outer_prefix=$(tmux -L "$outer_socket" show -gv prefix)
 
 if [ "$inner_buffer" != "$sentinel" ]; then
   echo "inner tmux did not retain the copied text" >&2
@@ -89,6 +91,10 @@ if [ "$expectation" = "--expect-blocked" ] && [ "$outer_buffer" != "$sentinel" ]
 fi
 if [ "$inner_term" != "tmux-256color" ]; then
   echo "inner tmux client TERM is '$inner_term', expected 'tmux-256color'" >&2
+  exit 1
+fi
+if [ "$outer_prefix" != "C-a" ] || [ "$inner_prefix" != "C-b" ]; then
+  echo "unexpected prefixes: outer=$outer_prefix inner=$inner_prefix" >&2
   exit 1
 fi
 
