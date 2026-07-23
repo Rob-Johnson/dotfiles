@@ -1,7 +1,20 @@
-# Homebrew (must come first so brew-installed tools are available below)
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Homebrew/Linuxbrew (must come first so brew-installed tools are available below)
+brew_bin=""
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  brew_bin="/opt/homebrew/bin/brew"
+elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  brew_bin="/home/linuxbrew/.linuxbrew/bin/brew"
+elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
+  brew_bin="$HOME/.linuxbrew/bin/brew"
+elif command -v brew >/dev/null 2>&1; then
+  brew_bin="$(command -v brew)"
+fi
 
-# Go compiler root (needs go in PATH from Homebrew)
+if [[ -n "$brew_bin" ]]; then
+  eval "$("$brew_bin" shellenv)"
+fi
+
+# Go compiler root (needs go in PATH from Homebrew/Linuxbrew)
 if command -v go >/dev/null 2>&1; then
   export GOROOT="$(go env GOROOT 2>/dev/null)"
 fi
@@ -11,6 +24,7 @@ typeset -U path
 path=(
   $HOME/bin
   $HOME/.local/bin         # Poetry, pipx, and other Python tools
+  $HOME/.npm-global/bin    # npm global packages with custom prefix
   $HOME/.bun/bin           # bun global packages (qmd, etc.)
   /opt/homebrew/bin        # macOS Homebrew (Apple Silicon)
   /usr/local/bin           # macOS Homebrew (Intel) / Linux

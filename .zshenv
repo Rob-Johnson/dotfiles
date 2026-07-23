@@ -24,7 +24,9 @@ if command -v ansible >/dev/null 2>&1; then
   export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections"
 fi
 export LESS="-nXR"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+if [[ "$OSTYPE" == darwin* ]]; then
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+fi
 export PYTHONSTARTUP=~/.pythonrc
 if [ -f "$HOME/.api_keys" ]; then
   source ~/.api_keys
@@ -34,6 +36,11 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
   . "${HOME}/.gpg-agent-info"
   export GPG_AGENT_INFO
 fi
+
+# Supply the Workspace Cloud Code Assist project to Pi's Gemini auth plugin.
+function pi() {
+  GOOGLE_CLOUD_PROJECT="${GOOGLE_CLOUD_PROJECT:-involuted-fold-502806-r1}" command pi "$@"
+}
 
 GPG_TTY=$(tty)
 export GPG_TTY

@@ -2,6 +2,7 @@
 !.*
 !*.zsh
 !*bin/
+!tests/
 !install.sh
 !ghostty-config
 .Bome/

@@ -42,14 +42,21 @@ export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch)
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 #rbenv
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
-#Java 7 jdk
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_15.jdk/Contents/Home"
+# Java 7 jdk (macOS only)
+if [[ "$OSTYPE" == darwin* ]]; then
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_15.jdk/Contents/Home"
+fi
 
-#bash auto completion
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+# bash auto completion
+if command -v brew >/dev/null 2>&1; then
+  BREW_BASH_COMPLETION="$(brew --prefix 2>/dev/null)/etc/bash_completion"
+  if [ -f "$BREW_BASH_COMPLETION" ]; then
+    . "$BREW_BASH_COMPLETION"
+  fi
 fi
 # init rbenv
-eval "$(rbenv init -)";
+if command -v rbenv >/dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
 
 

@@ -7,8 +7,10 @@ set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
+OS="$(uname -s)"
 
 echo "Installing dotfiles from $DOTFILES_DIR"
+echo "Detected OS: $OS"
 
 # Create backup directory
 mkdir -p "$BACKUP_DIR"
@@ -32,8 +34,12 @@ link_file() {
 for file in "$DOTFILES_DIR"/.*; do
     if [[ -f "$file" ]]; then
         filename=$(basename "$file")
-        # Skip .git, .DS_Store, and .gitignore/gitmodules
+        # Skip repo metadata and macOS-only files on non-macOS hosts
         if [[ "$filename" != ".git" && "$filename" != ".DS_Store" && "$filename" != ".gitignore" && "$filename" != ".gitmodules" ]]; then
+            if [[ "$OS" != "Darwin" && ( "$filename" == ".osx" || "$filename" == ".brewlist" ) ]]; then
+                echo "Skipping macOS-only file $filename on $OS"
+                continue
+            fi
             link_file "$file" "$HOME/$filename"
         fi
     fi
@@ -50,8 +56,8 @@ done
 # Create .config directory if it doesn't exist
 mkdir -p "$HOME/.config"
 
-# Link ghostty config
-if [[ -f "$DOTFILES_DIR/ghostty-config" ]]; then
+# Link Ghostty config on macOS only
+if [[ "$OS" == "Darwin" && -f "$DOTFILES_DIR/ghostty-config" ]]; then
     mkdir -p "$HOME/.config/ghostty"
     link_file "$DOTFILES_DIR/ghostty-config" "$HOME/.config/ghostty/config"
 fi
