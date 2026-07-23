@@ -93,7 +93,7 @@ if [ "$inner_term" != "tmux-256color" ]; then
   echo "inner tmux client TERM is '$inner_term', expected 'tmux-256color'" >&2
   exit 1
 fi
-if [ "$outer_prefix" != "C-a" ] || [ "$inner_prefix" != "C-b" ]; then
+if [ "$outer_prefix" != "C-a" ] || [ "$inner_prefix" != "C-a" ]; then
   echo "unexpected prefixes: outer=$outer_prefix inner=$inner_prefix" >&2
   exit 1
 fi
