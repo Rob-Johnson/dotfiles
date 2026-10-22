@@ -30,6 +30,13 @@ link_file() {
     ln -sf "$src" "$dst"
 }
 
+# Older installers linked the repository metadata into HOME, making the whole
+# home directory a Git working tree. Back up only our own legacy symlink.
+if [[ -L "$HOME/.git" && "$HOME/.git" -ef "$DOTFILES_DIR/.git" ]]; then
+    echo "Backing up legacy home Git link"
+    mv "$HOME/.git" "$BACKUP_DIR/"
+fi
+
 # Link dotfiles (files starting with .)
 for file in "$DOTFILES_DIR"/.*; do
     if [[ -f "$file" ]]; then
